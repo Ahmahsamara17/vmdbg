@@ -16,11 +16,11 @@ instructions:
   "0x02":
     mnemonic: "IMM"
     enabled: true
-    length: 3                # total instruction length in bytes
+    length: 3                
     operands:
       - { name: "dst", kind: "reg", source: "arg1" }
       - { name: "src", kind: "imm", source: "arg2" }
-    semantics: "arg1 = arg2" # optional, just documentation
+    semantics: "arg1 = arg2" 
 
   "0x40":
     mnemonic: "ADD"
@@ -69,7 +69,7 @@ instructions:
  
   "0x08":
     mnemonic: "JMP"
-    enabled: true # ← important: “known but ignore for now”
+    enabled: true 
     length: 3
     operands:
       - { name: "flag", kind: "imm", source: "arg1" }
