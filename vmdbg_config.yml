@@ -1,0 +1,16 @@
+# vmdbg_config.yml
+
+isa_file: "./vm_isa.yml"
+
+bytecode:
+  file: "./yan85.bin"
+  base_offset: 0        # where code starts in the file
+  max_size: 0x1000      # safety cap, optional
+  entry_offset: 0       # optional: where to start disassembly from
+
+runtime:
+  dispatcher_symbol:  null #"interpret_instruction"   # if the binary has a symbol
+  dispatcher_offset: 0x203e               # or e.g. 0x151a0 (offset from base)
+
+disasm:
+  file: "./disasm_yan85.txt"
