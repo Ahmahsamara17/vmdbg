@@ -15,6 +15,7 @@ runtime:
   vm_mem:
     base_register: "rdi"       
     regs_base_offset: 1024     
+    pc_reg: "i"
 
 disasm:
   file: "./disasm_yan85.txt"
