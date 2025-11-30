@@ -1,0 +1,5990 @@
+entry_point:                             ; Main entry point
+0000: call 1000
+0001: ret
+0002: push 4.2006942069e-05
+0003: max
+0004: push 1.1102230246251565e-16
+0005: clear_flags
+0006: add
+0007: pop
+0008: push 1.0
+0009: push 0.0
+0010: jmp_prec pc+2
+0011: swap
+0012: pop
+0013: ret
+overflow_check:
+0014: push 4.2006942069e-05
+0015: max
+0016: push 1.7976931348623157e+308
+0017: swap
+0018: dup2
+0019: push 1.0
+0020: swap
+0021: div
+0022: clear_flags
+0023: div
+0024: pop
+0025: div
+0026: pop
+0027: jmp_of pc+3
+0028: push 1.0
+0029: ret
+0030: push 0.0
+0031: ret
+0032: push -1.0
+0033: push -1.0
+0034: push -1.0
+0035: push -1.0
+0036: push -1.0
+0037: push -1.0
+0038: push -1.0
+0039: push 1.0
+0040: push -1.0
+0041: push 4.0
+0042: push -1.0
+0043: push -1.0
+0044: push -1.0
+0045: push -1.0
+0046: push -1.0
+0047: push -1.0
+0048: push -1.0
+0049: push -1.0
+0050: push -1.0
+0051: push 2.0
+0052: push -1.0
+0053: push -1.0
+0054: push -1.0
+0055: push -1.0
+0056: push -1.0
+0057: push -1.0
+0058: push -1.0
+0059: push -1.0
+0060: push -1.0
+0061: push -1.0
+0062: push -1.0
+0063: push 5.0
+0064: push -1.0
+0065: push 4.0
+0066: push -1.0
+0067: push 7.0
+0068: push -1.0
+0069: push -1.0
+0070: push 8.0
+0071: push -1.0
+0072: push -1.0
+0073: push -1.0
+0074: push 3.0
+0075: push -1.0
+0076: push -1.0
+0077: push -1.0
+0078: push -1.0
+0079: push 1.0
+0080: push -1.0
+0081: push 9.0
+0082: push -1.0
+0083: push -1.0
+0084: push -1.0
+0085: push -1.0
+0086: push 3.0
+0087: push -1.0
+0088: push -1.0
+0089: push 4.0
+0090: push -1.0
+0091: push -1.0
+0092: push 2.0
+0093: push -1.0
+0094: push -1.0
+0095: push -1.0
+0096: push 5.0
+0097: push -1.0
+0098: push 1.0
+0099: push -1.0
+0100: push -1.0
+0101: push -1.0
+0102: push -1.0
+0103: push -1.0
+0104: push -1.0
+0105: push -1.0
+0106: push -1.0
+0107: push 8.0
+0108: push -1.0
+0109: push 6.0
+0110: push -1.0
+0111: push -1.0
+0112: push -1.0
+0113: push 81.0     ; Q
+0114: dup
+0115: push 1.0
+0116: swap
+0117: clear_flags
+0118: div
+0119: pop
+0120: jmp_div0 pc+6
+0121: push -1.0
+0122: add
+0123: rot3
+0124: store
+0125: jmp pc+-11
+0126: pop
+0127: push 2.0
+0128: push 101.0     ; e
+0129: store
+0130: push 3.0
+0131: push 102.0     ; f
+0132: store
+0133: push 5.0
+0134: push 103.0     ; g
+0135: store
+0136: push 7.0
+0137: push 104.0     ; h
+0138: store
+0139: push 11.0
+0140: push 105.0     ; i
+0141: store
+0142: push 13.0
+0143: push 106.0     ; j
+0144: store
+0145: push 17.0
+0146: push 107.0     ; k
+0147: store
+0148: push 19.0
+0149: push 108.0     ; l
+0150: store
+0151: push 23.0
+0152: push 109.0     ; m
+0153: store
+0154: push -4.2069e-12
+0155: push 99.0     ; c
+0156: store
+0157: ret
+0158: push 100.0     ; d
+0159: add
+0160: load
+0161: ret
+0162: push 1.0
+0163: push 200.0
+0164: store
+0165: push 9.0
+0166: rot3
+0167: mul
+0168: swap
+0169: dup
+0170: push 1.0
+0171: swap
+0172: clear_flags
+0173: div
+0174: pop
+0175: jmp_div0 pc+14
+0176: push -1.0
+0177: add
+0178: dup2
+0179: add
+0180: load
+0181: call 158
+0182: push 200.0
+0183: rot3
+0184: load
+0185: mul
+0186: swap
+0187: store
+0188: jmp pc+-19
+0189: pop
+0190: pop
+0191: push 200.0
+0192: load
+0193: push 223092870.0
+0194: div
+0195: call overflow_check
+0196: ret
+0197: push 1.0
+0198: push 200.0
+0199: store
+0200: push 81.0     ; Q
+0201: add
+0202: dup
+0203: push 9.0
+0204: div
+0205: call 2
+0206: push 1.0
+0207: swap
+0208: clear_flags
+0209: div
+0210: pop
+0211: jmp_div0 pc+13
+0212: push -9.0
+0213: add
+0214: dup
+0215: load
+0216: call 158
+0217: push 200.0
+0218: rot3
+0219: load
+0220: mul
+0221: swap
+0222: store
+0223: jmp pc+-21
+0224: pop
+0225: push 200.0
+0226: load
+0227: push 223092870.0
+0228: div
+0229: call overflow_check
+0230: ret
+0231: push 1.0
+0232: push 200.0
+0233: store
+0234: dup
+0235: push 3.0
+0236: div
+0237: floor
+0238: rot3
+0239: push 3.0
+0240: mul
+0241: sub
+0242: push 3.0
+0243: mul
+0244: swap
+0245: push 27.0
+0246: mul
+0247: add
+0248: dup
+0249: push 0.0
+0250: add
+0251: load
+0252: call 158
+0253: push 200.0
+0254: rot3
+0255: load
+0256: mul
+0257: swap
+0258: store
+0259: dup
+0260: push 1.0
+0261: add
+0262: load
+0263: call 158
+0264: push 200.0
+0265: rot3
+0266: load
+0267: mul
+0268: swap
+0269: store
+0270: dup
+0271: push 2.0
+0272: add
+0273: load
+0274: call 158
+0275: push 200.0
+0276: rot3
+0277: load
+0278: mul
+0279: swap
+0280: store
+0281: dup
+0282: push 9.0
+0283: add
+0284: load
+0285: call 158
+0286: push 200.0
+0287: rot3
+0288: load
+0289: mul
+0290: swap
+0291: store
+0292: dup
+0293: push 10.0
+0294: add
+0295: load
+0296: call 158
+0297: push 200.0
+0298: rot3
+0299: load
+0300: mul
+0301: swap
+0302: store
+0303: dup
+0304: push 11.0
+0305: add
+0306: load
+0307: call 158
+0308: push 200.0
+0309: rot3
+0310: load
+0311: mul
+0312: swap
+0313: store
+0314: dup
+0315: push 18.0
+0316: add
+0317: load
+0318: call 158
+0319: push 200.0
+0320: rot3
+0321: load
+0322: mul
+0323: swap
+0324: store
+0325: dup
+0326: push 19.0
+0327: add
+0328: load
+0329: call 158
+0330: push 200.0
+0331: rot3
+0332: load
+0333: mul
+0334: swap
+0335: store
+0336: dup
+0337: push 20.0
+0338: add
+0339: load
+0340: call 158
+0341: push 200.0
+0342: rot3
+0343: load
+0344: mul
+0345: swap
+0346: store
+0347: pop
+0348: push 200.0
+0349: load
+0350: push 223092870.0
+0351: div
+0352: call overflow_check
+0353: ret
+0354: push 9.0
+0355: dup
+0356: call 2
+0357: push 1.0
+0358: swap
+0359: clear_flags
+0360: div
+0361: pop
+0362: jmp_div0 pc+13
+0363: push 1.0
+0364: sub
+0365: dup
+0366: call 162
+0367: swap
+0368: dup
+0369: call 197
+0370: swap
+0371: dup
+0372: call 231
+0373: swap
+0374: jmp pc+-19
+0375: pop
+0376: push 1.0
+0377: mul
+0378: mul
+0379: mul
+0380: mul
+0381: mul
+0382: mul
+0383: mul
+0384: mul
+0385: mul
+0386: mul
+0387: mul
+0388: mul
+0389: mul
+0390: mul
+0391: mul
+0392: mul
+0393: mul
+0394: mul
+0395: mul
+0396: mul
+0397: mul
+0398: mul
+0399: mul
+0400: mul
+0401: mul
+0402: mul
+0403: mul
+0404: call overflow_check
+0405: ret
+0406: dup
+0407: push 81.0     ; Q
+0408: div
+0409: call overflow_check
+0410: push 1.0
+0411: swap
+0412: clear_flags
+0413: div
+0414: pop
+0415: jmp_div0 pc+4
+0416: pop
+0417: call 354
+0418: ret
+0419: dup
+0420: load
+0421: call 2
+0422: push 1.0
+0423: swap
+0424: clear_flags
+0425: div
+0426: pop
+0427: jmp_div0 pc+5
+0428: push 1.0
+0429: add
+0430: call 406
+0431: ret
+0432: push 9.0
+0433: dup
+0434: call 2
+0435: push 1.0
+0436: swap
+0437: clear_flags
+0438: div
+0439: pop
+0440: jmp_div0 pc+22
+0441: dup2
+0442: swap
+0443: store
+0444: swap
+0445: rot3
+0446: push 1.0
+0447: add
+0448: call 406
+0449: push 1.0
+0450: swap
+0451: clear_flags
+0452: div
+0453: pop
+0454: jmp_div0 pc+5
+0455: pop
+0456: pop
+0457: push 1.0
+0458: ret
+0459: push -1.0
+0460: add
+0461: jmp pc+-28
+0462: pop
+0463: push -1.0
+0464: swap
+0465: store
+0466: push 0.0
+0467: ret
+
+0468: push 0.0
+0469: call 406
+0470: ret
+
+0471: push 6.9e-10
+0472: push 200.0
+0473: store
+0474: push 0.0
+0475: dup
+0476: push 81.0     ; Q
+0477: div
+0478: call 2
+0479: push 1.0
+0480: swap
+0481: sub
+0482: push 1.0
+0483: swap
+0484: clear_flags
+0485: div
+0486: pop
+0487: jmp_div0 pc+17
+0488: dup
+0489: load
+0490: push 200.0
+0491: rot3
+0492: load
+0493: push 3.141592653589793
+0494: mul
+0495: swap
+0496: mul
+0497: push 2.718281828459045
+0498: add
+0499: swap
+0500: store
+0501: push 1.0
+0502: add
+0503: jmp pc+-28
+0504: push 200.0
+0505: load
+0506: ret
+0507: nop
+0508: nop
+0509: nop
+0510: nop
+0511: nop
+0512: nop
+0513: nop
+0514: nop
+0515: nop
+0516: nop
+0517: nop
+0518: nop
+0519: nop
+0520: nop
+0521: nop
+0522: nop
+0523: nop
+0524: nop
+0525: nop
+0526: nop
+0527: nop
+0528: nop
+0529: nop
+0530: nop
+0531: nop
+0532: nop
+0533: nop
+0534: nop
+0535: nop
+0536: nop
+0537: nop
+0538: nop
+0539: nop
+0540: nop
+0541: nop
+0542: nop
+0543: nop
+0544: nop
+0545: nop
+0546: nop
+0547: nop
+0548: nop
+0549: nop
+0550: nop
+0551: nop
+0552: nop
+0553: nop
+0554: nop
+0555: nop
+0556: nop
+0557: nop
+0558: nop
+0559: nop
+0560: nop
+0561: nop
+0562: nop
+0563: nop
+0564: nop
+0565: nop
+0566: nop
+0567: nop
+0568: nop
+0569: nop
+0570: nop
+0571: nop
+0572: nop
+0573: nop
+0574: nop
+0575: nop
+0576: nop
+0577: nop
+0578: nop
+0579: nop
+0580: nop
+0581: nop
+0582: nop
+0583: nop
+0584: nop
+0585: nop
+0586: nop
+0587: nop
+0588: nop
+0589: nop
+0590: nop
+0591: nop
+0592: nop
+0593: nop
+0594: nop
+0595: nop
+0596: nop
+0597: nop
+0598: nop
+0599: nop
+0600: nop
+0601: nop
+0602: nop
+0603: nop
+0604: nop
+0605: nop
+0606: nop
+0607: nop
+0608: nop
+0609: nop
+0610: nop
+0611: nop
+0612: nop
+0613: nop
+0614: nop
+0615: nop
+0616: nop
+0617: nop
+0618: nop
+0619: nop
+0620: nop
+0621: nop
+0622: nop
+0623: nop
+0624: nop
+0625: nop
+0626: nop
+0627: nop
+0628: nop
+0629: nop
+0630: nop
+0631: nop
+0632: nop
+0633: nop
+0634: nop
+0635: nop
+0636: nop
+0637: nop
+0638: nop
+0639: nop
+0640: nop
+0641: nop
+0642: nop
+0643: nop
+0644: nop
+0645: nop
+0646: nop
+0647: nop
+0648: nop
+0649: nop
+0650: nop
+0651: nop
+0652: nop
+0653: nop
+0654: nop
+0655: nop
+0656: nop
+0657: nop
+0658: nop
+0659: nop
+0660: nop
+0661: nop
+0662: nop
+0663: nop
+0664: nop
+0665: nop
+0666: nop
+0667: nop
+0668: nop
+0669: nop
+0670: nop
+0671: nop
+0672: nop
+0673: nop
+0674: nop
+0675: nop
+0676: nop
+0677: nop
+0678: nop
+0679: nop
+0680: nop
+0681: nop
+0682: nop
+0683: nop
+0684: nop
+0685: nop
+0686: nop
+0687: nop
+0688: nop
+0689: nop
+0690: nop
+0691: nop
+0692: nop
+0693: nop
+0694: nop
+0695: nop
+0696: nop
+0697: nop
+0698: nop
+0699: nop
+0700: nop
+0701: nop
+0702: nop
+0703: nop
+0704: nop
+0705: nop
+0706: nop
+0707: nop
+0708: nop
+0709: nop
+0710: nop
+0711: nop
+0712: nop
+0713: nop
+0714: nop
+0715: nop
+0716: nop
+0717: nop
+0718: nop
+0719: nop
+0720: nop
+0721: nop
+0722: nop
+0723: nop
+0724: nop
+0725: nop
+0726: nop
+0727: nop
+0728: nop
+0729: nop
+0730: nop
+0731: nop
+0732: nop
+0733: nop
+0734: nop
+0735: nop
+0736: nop
+0737: nop
+0738: nop
+0739: nop
+0740: nop
+0741: nop
+0742: nop
+0743: nop
+0744: nop
+0745: nop
+0746: nop
+0747: nop
+0748: nop
+0749: nop
+0750: nop
+0751: nop
+0752: nop
+0753: nop
+0754: nop
+0755: nop
+0756: nop
+0757: nop
+0758: nop
+0759: nop
+0760: nop
+0761: nop
+0762: nop
+0763: nop
+0764: nop
+0765: nop
+0766: nop
+0767: nop
+0768: nop
+0769: nop
+0770: nop
+0771: nop
+0772: nop
+0773: nop
+0774: nop
+0775: nop
+0776: nop
+0777: nop
+0778: nop
+0779: nop
+0780: nop
+0781: nop
+0782: nop
+0783: nop
+0784: nop
+0785: nop
+0786: nop
+0787: nop
+0788: nop
+0789: nop
+0790: nop
+0791: nop
+0792: nop
+0793: nop
+0794: nop
+0795: nop
+0796: nop
+0797: nop
+0798: nop
+0799: nop
+0800: nop
+0801: nop
+0802: nop
+0803: nop
+0804: nop
+0805: nop
+0806: nop
+0807: nop
+0808: nop
+0809: nop
+0810: nop
+0811: nop
+0812: nop
+0813: nop
+0814: nop
+0815: nop
+0816: nop
+0817: nop
+0818: nop
+0819: nop
+0820: nop
+0821: nop
+0822: nop
+0823: nop
+0824: nop
+0825: nop
+0826: nop
+0827: nop
+0828: nop
+0829: nop
+0830: nop
+0831: nop
+0832: nop
+0833: nop
+0834: nop
+0835: nop
+0836: nop
+0837: nop
+0838: nop
+0839: nop
+0840: nop
+0841: nop
+0842: nop
+0843: nop
+0844: nop
+0845: nop
+0846: nop
+0847: nop
+0848: nop
+0849: nop
+0850: nop
+0851: nop
+0852: nop
+0853: nop
+0854: nop
+0855: nop
+0856: nop
+0857: nop
+0858: nop
+0859: nop
+0860: nop
+0861: nop
+0862: nop
+0863: nop
+0864: nop
+0865: nop
+0866: nop
+0867: nop
+0868: nop
+0869: nop
+0870: nop
+0871: nop
+0872: nop
+0873: nop
+0874: nop
+0875: nop
+0876: nop
+0877: nop
+0878: nop
+0879: nop
+0880: nop
+0881: nop
+0882: nop
+0883: nop
+0884: nop
+0885: nop
+0886: nop
+0887: nop
+0888: nop
+0889: nop
+0890: nop
+0891: nop
+0892: nop
+0893: nop
+0894: nop
+0895: nop
+0896: nop
+0897: nop
+0898: nop
+0899: nop
+0900: nop
+0901: nop
+0902: nop
+0903: nop
+0904: nop
+0905: nop
+0906: nop
+0907: nop
+0908: nop
+0909: nop
+0910: nop
+0911: nop
+0912: nop
+0913: nop
+0914: nop
+0915: nop
+0916: nop
+0917: nop
+0918: nop
+0919: nop
+0920: nop
+0921: nop
+0922: nop
+0923: nop
+0924: nop
+0925: nop
+0926: nop
+0927: nop
+0928: nop
+0929: nop
+0930: nop
+0931: nop
+0932: nop
+0933: nop
+0934: nop
+0935: nop
+0936: nop
+0937: nop
+0938: nop
+0939: nop
+0940: nop
+0941: nop
+0942: nop
+0943: nop
+0944: nop
+0945: nop
+0946: nop
+0947: nop
+0948: nop
+0949: nop
+0950: nop
+0951: nop
+0952: nop
+0953: nop
+0954: nop
+0955: nop
+0956: nop
+0957: nop
+0958: nop
+0959: nop
+0960: nop
+0961: nop
+0962: nop
+0963: nop
+0964: nop
+0965: nop
+0966: nop
+0967: nop
+0968: nop
+0969: nop
+0970: nop
+0971: nop
+0972: nop
+0973: nop
+0974: nop
+0975: nop
+0976: nop
+0977: nop
+0978: nop
+0979: nop
+0980: nop
+0981: nop
+0982: nop
+0983: nop
+0984: nop
+0985: nop
+0986: nop
+0987: nop
+0988: nop
+0989: nop
+0990: nop
+0991: nop
+0992: nop
+0993: nop
+0994: nop
+0995: nop
+0996: nop
+0997: nop
+0998: nop
+0999: nop
+1000: push 27.0
+1001: putc
+1002: push 91.0     ; [
+1003: putc
+1004: push 48.0     ; 0
+1005: putc
+1006: push 109.0     ; m
+1007: putc
+1008: push 10.0
+1009: putc
+1010: push 32.0     ;  
+1011: putc
+1012: push 32.0     ;  
+1013: putc
+1014: push 32.0     ;  
+1015: putc
+1016: push 32.0     ;  
+1017: putc
+1018: push 32.0     ;  
+1019: putc
+1020: push 32.0     ;  
+1021: putc
+1022: push 32.0     ;  
+1023: putc
+1024: push 32.0     ;  
+1025: putc
+1026: push 32.0     ;  
+1027: putc
+1028: push 32.0     ;  
+1029: putc
+1030: push 32.0     ;  
+1031: putc
+1032: push 32.0     ;  
+1033: putc
+1034: push 32.0     ;  
+1035: putc
+1036: push 32.0     ;  
+1037: putc
+1038: push 32.0     ;  
+1039: putc
+1040: push 32.0     ;  
+1041: putc
+1042: push 32.0     ;  
+1043: putc
+1044: push 32.0     ;  
+1045: putc
+1046: push 32.0     ;  
+1047: putc
+1048: push 32.0     ;  
+1049: putc
+1050: push 32.0     ;  
+1051: putc
+1052: push 32.0     ;  
+1053: putc
+1054: push 32.0     ;  
+1055: putc
+1056: push 32.0     ;  
+1057: putc
+1058: push 32.0     ;  
+1059: putc
+1060: push 32.0     ;  
+1061: putc
+1062: push 32.0     ;  
+1063: putc
+1064: push 32.0     ;  
+1065: putc
+1066: push 32.0     ;  
+1067: putc
+1068: push 32.0     ;  
+1069: putc
+1070: push 32.0     ;  
+1071: putc
+1072: push 32.0     ;  
+1073: putc
+1074: push 32.0     ;  
+1075: putc
+1076: push 32.0     ;  
+1077: putc
+1078: push 32.0     ;  
+1079: putc
+1080: push 32.0     ;  
+1081: putc
+1082: push 32.0     ;  
+1083: putc
+1084: push 32.0     ;  
+1085: putc
+1086: push 32.0     ;  
+1087: putc
+1088: push 32.0     ;  
+1089: putc
+1090: push 32.0     ;  
+1091: putc
+1092: push 32.0     ;  
+1093: putc
+1094: push 32.0     ;  
+1095: putc
+1096: push 32.0     ;  
+1097: putc
+1098: push 32.0     ;  
+1099: putc
+1100: push 32.0     ;  
+1101: putc
+1102: push 32.0     ;  
+1103: putc
+1104: push 32.0     ;  
+1105: putc
+1106: push 46.0     ; .
+1107: putc
+1108: push 46.0     ; .
+1109: putc
+1110: push 46.0     ; .
+1111: putc
+1112: push 46.0     ; .
+1113: putc
+1114: push 10.0
+1115: putc
+1116: push 32.0     ;  
+1117: putc
+1118: push 32.0     ;  
+1119: putc
+1120: push 32.0     ;  
+1121: putc
+1122: push 32.0     ;  
+1123: putc
+1124: push 32.0     ;  
+1125: putc
+1126: push 32.0     ;  
+1127: putc
+1128: push 32.0     ;  
+1129: putc
+1130: push 32.0     ;  
+1131: putc
+1132: push 32.0     ;  
+1133: putc
+1134: push 32.0     ;  
+1135: putc
+1136: push 32.0     ;  
+1137: putc
+1138: push 32.0     ;  
+1139: putc
+1140: push 32.0     ;  
+1141: putc
+1142: push 32.0     ;  
+1143: putc
+1144: push 32.0     ;  
+1145: putc
+1146: push 32.0     ;  
+1147: putc
+1148: push 32.0     ;  
+1149: putc
+1150: push 32.0     ;  
+1151: putc
+1152: push 32.0     ;  
+1153: putc
+1154: push 32.0     ;  
+1155: putc
+1156: push 32.0     ;  
+1157: putc
+1158: push 32.0     ;  
+1159: putc
+1160: push 32.0     ;  
+1161: putc
+1162: push 32.0     ;  
+1163: putc
+1164: push 32.0     ;  
+1165: putc
+1166: push 32.0     ;  
+1167: putc
+1168: push 32.0     ;  
+1169: putc
+1170: push 32.0     ;  
+1171: putc
+1172: push 32.0     ;  
+1173: putc
+1174: push 32.0     ;  
+1175: putc
+1176: push 32.0     ;  
+1177: putc
+1178: push 32.0     ;  
+1179: putc
+1180: push 32.0     ;  
+1181: putc
+1182: push 32.0     ;  
+1183: putc
+1184: push 32.0     ;  
+1185: putc
+1186: push 32.0     ;  
+1187: putc
+1188: push 32.0     ;  
+1189: putc
+1190: push 32.0     ;  
+1191: putc
+1192: push 32.0     ;  
+1193: putc
+1194: push 32.0     ;  
+1195: putc
+1196: push 32.0     ;  
+1197: putc
+1198: push 32.0     ;  
+1199: putc
+1200: push 32.0     ;  
+1201: putc
+1202: push 32.0     ;  
+1203: putc
+1204: push 46.0     ; .
+1205: putc
+1206: push 46.0     ; .
+1207: putc
+1208: push 39.0     ; '
+1209: putc
+1210: push 59.0     ; ;
+1211: putc
+1212: push 58.0     ; :
+1213: putc
+1214: push 58.0     ; :
+1215: putc
+1216: push 99.0     ; c
+1217: putc
+1218: push 58.0     ; :
+1219: putc
+1220: push 59.0     ; ;
+1221: putc
+1222: push 44.0     ; ,
+1223: putc
+1224: push 39.0     ; '
+1225: putc
+1226: push 46.0     ; .
+1227: putc
+1228: push 10.0
+1229: putc
+1230: push 32.0     ;  
+1231: putc
+1232: push 32.0     ;  
+1233: putc
+1234: push 32.0     ;  
+1235: putc
+1236: push 32.0     ;  
+1237: putc
+1238: push 32.0     ;  
+1239: putc
+1240: push 32.0     ;  
+1241: putc
+1242: push 32.0     ;  
+1243: putc
+1244: push 32.0     ;  
+1245: putc
+1246: push 32.0     ;  
+1247: putc
+1248: push 32.0     ;  
+1249: putc
+1250: push 32.0     ;  
+1251: putc
+1252: push 32.0     ;  
+1253: putc
+1254: push 32.0     ;  
+1255: putc
+1256: push 32.0     ;  
+1257: putc
+1258: push 32.0     ;  
+1259: putc
+1260: push 32.0     ;  
+1261: putc
+1262: push 32.0     ;  
+1263: putc
+1264: push 32.0     ;  
+1265: putc
+1266: push 32.0     ;  
+1267: putc
+1268: push 32.0     ;  
+1269: putc
+1270: push 32.0     ;  
+1271: putc
+1272: push 32.0     ;  
+1273: putc
+1274: push 32.0     ;  
+1275: putc
+1276: push 32.0     ;  
+1277: putc
+1278: push 32.0     ;  
+1279: putc
+1280: push 32.0     ;  
+1281: putc
+1282: push 32.0     ;  
+1283: putc
+1284: push 32.0     ;  
+1285: putc
+1286: push 32.0     ;  
+1287: putc
+1288: push 32.0     ;  
+1289: putc
+1290: push 32.0     ;  
+1291: putc
+1292: push 32.0     ;  
+1293: putc
+1294: push 32.0     ;  
+1295: putc
+1296: push 32.0     ;  
+1297: putc
+1298: push 32.0     ;  
+1299: putc
+1300: push 32.0     ;  
+1301: putc
+1302: push 32.0     ;  
+1303: putc
+1304: push 32.0     ;  
+1305: putc
+1306: push 32.0     ;  
+1307: putc
+1308: push 32.0     ;  
+1309: putc
+1310: push 46.0     ; .
+1311: putc
+1312: push 46.0     ; .
+1313: putc
+1314: push 44.0     ; ,
+1315: putc
+1316: push 59.0     ; ;
+1317: putc
+1318: push 58.0     ; :
+1319: putc
+1320: push 99.0     ; c
+1321: putc
+1322: push 99.0     ; c
+1323: putc
+1324: push 99.0     ; c
+1325: putc
+1326: push 99.0     ; c
+1327: putc
+1328: push 99.0     ; c
+1329: putc
+1330: push 99.0     ; c
+1331: putc
+1332: push 99.0     ; c
+1333: putc
+1334: push 99.0     ; c
+1335: putc
+1336: push 99.0     ; c
+1337: putc
+1338: push 99.0     ; c
+1339: putc
+1340: push 58.0     ; :
+1341: putc
+1342: push 59.0     ; ;
+1343: putc
+1344: push 44.0     ; ,
+1345: putc
+1346: push 39.0     ; '
+1347: putc
+1348: push 46.0     ; .
+1349: putc
+1350: push 10.0
+1351: putc
+1352: push 32.0     ;  
+1353: putc
+1354: push 32.0     ;  
+1355: putc
+1356: push 32.0     ;  
+1357: putc
+1358: push 32.0     ;  
+1359: putc
+1360: push 32.0     ;  
+1361: putc
+1362: push 32.0     ;  
+1363: putc
+1364: push 32.0     ;  
+1365: putc
+1366: push 32.0     ;  
+1367: putc
+1368: push 32.0     ;  
+1369: putc
+1370: push 32.0     ;  
+1371: putc
+1372: push 32.0     ;  
+1373: putc
+1374: push 32.0     ;  
+1375: putc
+1376: push 32.0     ;  
+1377: putc
+1378: push 32.0     ;  
+1379: putc
+1380: push 32.0     ;  
+1381: putc
+1382: push 32.0     ;  
+1383: putc
+1384: push 32.0     ;  
+1385: putc
+1386: push 32.0     ;  
+1387: putc
+1388: push 32.0     ;  
+1389: putc
+1390: push 32.0     ;  
+1391: putc
+1392: push 32.0     ;  
+1393: putc
+1394: push 32.0     ;  
+1395: putc
+1396: push 32.0     ;  
+1397: putc
+1398: push 32.0     ;  
+1399: putc
+1400: push 32.0     ;  
+1401: putc
+1402: push 32.0     ;  
+1403: putc
+1404: push 32.0     ;  
+1405: putc
+1406: push 32.0     ;  
+1407: putc
+1408: push 32.0     ;  
+1409: putc
+1410: push 32.0     ;  
+1411: putc
+1412: push 32.0     ;  
+1413: putc
+1414: push 32.0     ;  
+1415: putc
+1416: push 32.0     ;  
+1417: putc
+1418: push 32.0     ;  
+1419: putc
+1420: push 32.0     ;  
+1421: putc
+1422: push 32.0     ;  
+1423: putc
+1424: push 46.0     ; .
+1425: putc
+1426: push 39.0     ; '
+1427: putc
+1428: push 44.0     ; ,
+1429: putc
+1430: push 59.0     ; ;
+1431: putc
+1432: push 58.0     ; :
+1433: putc
+1434: push 58.0     ; :
+1435: putc
+1436: push 99.0     ; c
+1437: putc
+1438: push 99.0     ; c
+1439: putc
+1440: push 99.0     ; c
+1441: putc
+1442: push 27.0
+1443: putc
+1444: push 91.0     ; [
+1445: putc
+1446: push 51.0     ; 3
+1447: putc
+1448: push 49.0     ; 1
+1449: putc
+1450: push 109.0     ; m
+1451: putc
+1452: push 99.0     ; c
+1453: putc
+1454: push 111.0     ; o
+1455: putc
+1456: push 114.0     ; r
+1457: putc
+1458: push 99.0     ; c
+1459: putc
+1460: push 116.0     ; t
+1461: putc
+1462: push 102.0     ; f
+1463: putc
+1464: push 123.0     ; {
+1465: putc
+1466: push 46.0     ; .
+1467: putc
+1468: push 46.0     ; .
+1469: putc
+1470: push 46.0     ; .
+1471: putc
+1472: push 125.0     ; }
+1473: putc
+1474: push 27.0
+1475: putc
+1476: push 91.0     ; [
+1477: putc
+1478: push 48.0     ; 0
+1479: putc
+1480: push 109.0     ; m
+1481: putc
+1482: push 99.0     ; c
+1483: putc
+1484: push 58.0     ; :
+1485: putc
+1486: push 99.0     ; c
+1487: putc
+1488: push 58.0     ; :
+1489: putc
+1490: push 58.0     ; :
+1491: putc
+1492: push 59.0     ; ;
+1493: putc
+1494: push 44.0     ; ,
+1495: putc
+1496: push 39.0     ; '
+1497: putc
+1498: push 46.0     ; .
+1499: putc
+1500: push 10.0
+1501: putc
+1502: push 32.0     ;  
+1503: putc
+1504: push 32.0     ;  
+1505: putc
+1506: push 32.0     ;  
+1507: putc
+1508: push 32.0     ;  
+1509: putc
+1510: push 32.0     ;  
+1511: putc
+1512: push 32.0     ;  
+1513: putc
+1514: push 32.0     ;  
+1515: putc
+1516: push 32.0     ;  
+1517: putc
+1518: push 32.0     ;  
+1519: putc
+1520: push 32.0     ;  
+1521: putc
+1522: push 32.0     ;  
+1523: putc
+1524: push 32.0     ;  
+1525: putc
+1526: push 32.0     ;  
+1527: putc
+1528: push 32.0     ;  
+1529: putc
+1530: push 32.0     ;  
+1531: putc
+1532: push 32.0     ;  
+1533: putc
+1534: push 32.0     ;  
+1535: putc
+1536: push 32.0     ;  
+1537: putc
+1538: push 32.0     ;  
+1539: putc
+1540: push 32.0     ;  
+1541: putc
+1542: push 32.0     ;  
+1543: putc
+1544: push 32.0     ;  
+1545: putc
+1546: push 32.0     ;  
+1547: putc
+1548: push 32.0     ;  
+1549: putc
+1550: push 32.0     ;  
+1551: putc
+1552: push 32.0     ;  
+1553: putc
+1554: push 32.0     ;  
+1555: putc
+1556: push 32.0     ;  
+1557: putc
+1558: push 32.0     ;  
+1559: putc
+1560: push 32.0     ;  
+1561: putc
+1562: push 32.0     ;  
+1563: putc
+1564: push 32.0     ;  
+1565: putc
+1566: push 32.0     ;  
+1567: putc
+1568: push 32.0     ;  
+1569: putc
+1570: push 46.0     ; .
+1571: putc
+1572: push 46.0     ; .
+1573: putc
+1574: push 46.0     ; .
+1575: putc
+1576: push 46.0     ; .
+1577: putc
+1578: push 46.0     ; .
+1579: putc
+1580: push 39.0     ; '
+1581: putc
+1582: push 59.0     ; ;
+1583: putc
+1584: push 58.0     ; :
+1585: putc
+1586: push 99.0     ; c
+1587: putc
+1588: push 99.0     ; c
+1589: putc
+1590: push 99.0     ; c
+1591: putc
+1592: push 99.0     ; c
+1593: putc
+1594: push 99.0     ; c
+1595: putc
+1596: push 99.0     ; c
+1597: putc
+1598: push 99.0     ; c
+1599: putc
+1600: push 99.0     ; c
+1601: putc
+1602: push 99.0     ; c
+1603: putc
+1604: push 99.0     ; c
+1605: putc
+1606: push 99.0     ; c
+1607: putc
+1608: push 58.0     ; :
+1609: putc
+1610: push 99.0     ; c
+1611: putc
+1612: push 99.0     ; c
+1613: putc
+1614: push 99.0     ; c
+1615: putc
+1616: push 58.0     ; :
+1617: putc
+1618: push 58.0     ; :
+1619: putc
+1620: push 59.0     ; ;
+1621: putc
+1622: push 44.0     ; ,
+1623: putc
+1624: push 39.0     ; '
+1625: putc
+1626: push 46.0     ; .
+1627: putc
+1628: push 46.0     ; .
+1629: putc
+1630: push 46.0     ; .
+1631: putc
+1632: push 10.0
+1633: putc
+1634: push 32.0     ;  
+1635: putc
+1636: push 32.0     ;  
+1637: putc
+1638: push 32.0     ;  
+1639: putc
+1640: push 32.0     ;  
+1641: putc
+1642: push 32.0     ;  
+1643: putc
+1644: push 32.0     ;  
+1645: putc
+1646: push 32.0     ;  
+1647: putc
+1648: push 32.0     ;  
+1649: putc
+1650: push 32.0     ;  
+1651: putc
+1652: push 32.0     ;  
+1653: putc
+1654: push 32.0     ;  
+1655: putc
+1656: push 32.0     ;  
+1657: putc
+1658: push 32.0     ;  
+1659: putc
+1660: push 32.0     ;  
+1661: putc
+1662: push 32.0     ;  
+1663: putc
+1664: push 32.0     ;  
+1665: putc
+1666: push 32.0     ;  
+1667: putc
+1668: push 32.0     ;  
+1669: putc
+1670: push 32.0     ;  
+1671: putc
+1672: push 32.0     ;  
+1673: putc
+1674: push 32.0     ;  
+1675: putc
+1676: push 32.0     ;  
+1677: putc
+1678: push 32.0     ;  
+1679: putc
+1680: push 32.0     ;  
+1681: putc
+1682: push 32.0     ;  
+1683: putc
+1684: push 32.0     ;  
+1685: putc
+1686: push 32.0     ;  
+1687: putc
+1688: push 46.0     ; .
+1689: putc
+1690: push 59.0     ; ;
+1691: putc
+1692: push 107.0     ; k
+1693: putc
+1694: push 79.0     ; O
+1695: putc
+1696: push 111.0     ; o
+1697: putc
+1698: push 46.0     ; .
+1699: putc
+1700: push 32.0     ;  
+1701: putc
+1702: push 46.0     ; .
+1703: putc
+1704: push 39.0     ; '
+1705: putc
+1706: push 44.0     ; ,
+1707: putc
+1708: push 46.0     ; .
+1709: putc
+1710: push 46.0     ; .
+1711: putc
+1712: push 46.0     ; .
+1713: putc
+1714: push 46.0     ; .
+1715: putc
+1716: push 46.0     ; .
+1717: putc
+1718: push 39.0     ; '
+1719: putc
+1720: push 44.0     ; ,
+1721: putc
+1722: push 59.0     ; ;
+1723: putc
+1724: push 58.0     ; :
+1725: putc
+1726: push 58.0     ; :
+1727: putc
+1728: push 58.0     ; :
+1729: putc
+1730: push 58.0     ; :
+1731: putc
+1732: push 58.0     ; :
+1733: putc
+1734: push 99.0     ; c
+1735: putc
+1736: push 99.0     ; c
+1737: putc
+1738: push 99.0     ; c
+1739: putc
+1740: push 99.0     ; c
+1741: putc
+1742: push 58.0     ; :
+1743: putc
+1744: push 59.0     ; ;
+1745: putc
+1746: push 44.0     ; ,
+1747: putc
+1748: push 39.0     ; '
+1749: putc
+1750: push 46.0     ; .
+1751: putc
+1752: push 46.0     ; .
+1753: putc
+1754: push 46.0     ; .
+1755: putc
+1756: push 46.0     ; .
+1757: putc
+1758: push 46.0     ; .
+1759: putc
+1760: push 46.0     ; .
+1761: putc
+1762: push 46.0     ; .
+1763: putc
+1764: push 10.0
+1765: putc
+1766: push 32.0     ;  
+1767: putc
+1768: push 32.0     ;  
+1769: putc
+1770: push 32.0     ;  
+1771: putc
+1772: push 32.0     ;  
+1773: putc
+1774: push 32.0     ;  
+1775: putc
+1776: push 32.0     ;  
+1777: putc
+1778: push 32.0     ;  
+1779: putc
+1780: push 32.0     ;  
+1781: putc
+1782: push 32.0     ;  
+1783: putc
+1784: push 32.0     ;  
+1785: putc
+1786: push 32.0     ;  
+1787: putc
+1788: push 32.0     ;  
+1789: putc
+1790: push 32.0     ;  
+1791: putc
+1792: push 32.0     ;  
+1793: putc
+1794: push 32.0     ;  
+1795: putc
+1796: push 32.0     ;  
+1797: putc
+1798: push 32.0     ;  
+1799: putc
+1800: push 32.0     ;  
+1801: putc
+1802: push 32.0     ;  
+1803: putc
+1804: push 32.0     ;  
+1805: putc
+1806: push 32.0     ;  
+1807: putc
+1808: push 32.0     ;  
+1809: putc
+1810: push 32.0     ;  
+1811: putc
+1812: push 32.0     ;  
+1813: putc
+1814: push 32.0     ;  
+1815: putc
+1816: push 39.0     ; '
+1817: putc
+1818: push 111.0     ; o
+1819: putc
+1820: push 79.0     ; O
+1821: putc
+1822: push 100.0     ; d
+1823: putc
+1824: push 99.0     ; c
+1825: putc
+1826: push 108.0     ; l
+1827: putc
+1828: push 120.0     ; x
+1829: putc
+1830: push 107.0     ; k
+1831: putc
+1832: push 100.0     ; d
+1833: putc
+1834: push 46.0     ; .
+1835: putc
+1836: push 46.0     ; .
+1837: putc
+1838: push 44.0     ; ,
+1839: putc
+1840: push 44.0     ; ,
+1841: putc
+1842: push 44.0     ; ,
+1843: putc
+1844: push 44.0     ; ,
+1845: putc
+1846: push 39.0     ; '
+1847: putc
+1848: push 46.0     ; .
+1849: putc
+1850: push 46.0     ; .
+1851: putc
+1852: push 46.0     ; .
+1853: putc
+1854: push 46.0     ; .
+1855: putc
+1856: push 46.0     ; .
+1857: putc
+1858: push 39.0     ; '
+1859: putc
+1860: push 44.0     ; ,
+1861: putc
+1862: push 59.0     ; ;
+1863: putc
+1864: push 58.0     ; :
+1865: putc
+1866: push 58.0     ; :
+1867: putc
+1868: push 59.0     ; ;
+1869: putc
+1870: push 44.0     ; ,
+1871: putc
+1872: push 46.0     ; .
+1873: putc
+1874: push 46.0     ; .
+1875: putc
+1876: push 46.0     ; .
+1877: putc
+1878: push 46.0     ; .
+1879: putc
+1880: push 46.0     ; .
+1881: putc
+1882: push 46.0     ; .
+1883: putc
+1884: push 46.0     ; .
+1885: putc
+1886: push 46.0     ; .
+1887: putc
+1888: push 46.0     ; .
+1889: putc
+1890: push 46.0     ; .
+1891: putc
+1892: push 46.0     ; .
+1893: putc
+1894: push 46.0     ; .
+1895: putc
+1896: push 10.0
+1897: putc
+1898: push 32.0     ;  
+1899: putc
+1900: push 32.0     ;  
+1901: putc
+1902: push 32.0     ;  
+1903: putc
+1904: push 32.0     ;  
+1905: putc
+1906: push 32.0     ;  
+1907: putc
+1908: push 32.0     ;  
+1909: putc
+1910: push 32.0     ;  
+1911: putc
+1912: push 32.0     ;  
+1913: putc
+1914: push 32.0     ;  
+1915: putc
+1916: push 32.0     ;  
+1917: putc
+1918: push 32.0     ;  
+1919: putc
+1920: push 32.0     ;  
+1921: putc
+1922: push 32.0     ;  
+1923: putc
+1924: push 32.0     ;  
+1925: putc
+1926: push 32.0     ;  
+1927: putc
+1928: push 32.0     ;  
+1929: putc
+1930: push 32.0     ;  
+1931: putc
+1932: push 32.0     ;  
+1933: putc
+1934: push 32.0     ;  
+1935: putc
+1936: push 32.0     ;  
+1937: putc
+1938: push 32.0     ;  
+1939: putc
+1940: push 32.0     ;  
+1941: putc
+1942: push 39.0     ; '
+1943: putc
+1944: push 108.0     ; l
+1945: putc
+1946: push 107.0     ; k
+1947: putc
+1948: push 100.0     ; d
+1949: putc
+1950: push 108.0     ; l
+1951: putc
+1952: push 58.0     ; :
+1953: putc
+1954: push 59.0     ; ;
+1955: putc
+1956: push 59.0     ; ;
+1957: putc
+1958: push 58.0     ; :
+1959: putc
+1960: push 111.0     ; o
+1961: putc
+1962: push 120.0     ; x
+1963: putc
+1964: push 100.0     ; d
+1965: putc
+1966: push 46.0     ; .
+1967: putc
+1968: push 46.0     ; .
+1969: putc
+1970: push 46.0     ; .
+1971: putc
+1972: push 39.0     ; '
+1973: putc
+1974: push 44.0     ; ,
+1975: putc
+1976: push 44.0     ; ,
+1977: putc
+1978: push 39.0     ; '
+1979: putc
+1980: push 46.0     ; .
+1981: putc
+1982: push 46.0     ; .
+1983: putc
+1984: push 44.0     ; ,
+1985: putc
+1986: push 44.0     ; ,
+1987: putc
+1988: push 39.0     ; '
+1989: putc
+1990: push 46.0     ; .
+1991: putc
+1992: push 46.0     ; .
+1993: putc
+1994: push 46.0     ; .
+1995: putc
+1996: push 46.0     ; .
+1997: putc
+1998: push 46.0     ; .
+1999: putc
+2000: push 46.0     ; .
+2001: putc
+2002: push 46.0     ; .
+2003: putc
+2004: push 46.0     ; .
+2005: putc
+2006: push 46.0     ; .
+2007: putc
+2008: push 46.0     ; .
+2009: putc
+2010: push 46.0     ; .
+2011: putc
+2012: push 46.0     ; .
+2013: putc
+2014: push 46.0     ; .
+2015: putc
+2016: push 46.0     ; .
+2017: putc
+2018: push 46.0     ; .
+2019: putc
+2020: push 46.0     ; .
+2021: putc
+2022: push 46.0     ; .
+2023: putc
+2024: push 46.0     ; .
+2025: putc
+2026: push 46.0     ; .
+2027: putc
+2028: push 32.0     ;  
+2029: putc
+2030: push 44.0     ; ,
+2031: putc
+2032: push 46.0     ; .
+2033: putc
+2034: push 10.0
+2035: putc
+2036: push 32.0     ;  
+2037: putc
+2038: push 32.0     ;  
+2039: putc
+2040: push 32.0     ;  
+2041: putc
+2042: push 32.0     ;  
+2043: putc
+2044: push 32.0     ;  
+2045: putc
+2046: push 32.0     ;  
+2047: putc
+2048: push 32.0     ;  
+2049: putc
+2050: push 32.0     ;  
+2051: putc
+2052: push 32.0     ;  
+2053: putc
+2054: push 32.0     ;  
+2055: putc
+2056: push 32.0     ;  
+2057: putc
+2058: push 32.0     ;  
+2059: putc
+2060: push 32.0     ;  
+2061: putc
+2062: push 32.0     ;  
+2063: putc
+2064: push 32.0     ;  
+2065: putc
+2066: push 32.0     ;  
+2067: putc
+2068: push 32.0     ;  
+2069: putc
+2070: push 32.0     ;  
+2071: putc
+2072: push 32.0     ;  
+2073: putc
+2074: push 46.0     ; .
+2075: putc
+2076: push 99.0     ; c
+2077: putc
+2078: push 107.0     ; k
+2079: putc
+2080: push 100.0     ; d
+2081: putc
+2082: push 108.0     ; l
+2083: putc
+2084: push 58.0     ; :
+2085: putc
+2086: push 58.0     ; :
+2087: putc
+2088: push 59.0     ; ;
+2089: putc
+2090: push 59.0     ; ;
+2091: putc
+2092: push 99.0     ; c
+2093: putc
+2094: push 108.0     ; l
+2095: putc
+2096: push 108.0     ; l
+2097: putc
+2098: push 58.0     ; :
+2099: putc
+2100: push 59.0     ; ;
+2101: putc
+2102: push 59.0     ; ;
+2103: putc
+2104: push 46.0     ; .
+2105: putc
+2106: push 46.0     ; .
+2107: putc
+2108: push 46.0     ; .
+2109: putc
+2110: push 46.0     ; .
+2111: putc
+2112: push 46.0     ; .
+2113: putc
+2114: push 59.0     ; ;
+2115: putc
+2116: push 107.0     ; k
+2117: putc
+2118: push 100.0     ; d
+2119: putc
+2120: push 99.0     ; c
+2121: putc
+2122: push 39.0     ; '
+2123: putc
+2124: push 39.0     ; '
+2125: putc
+2126: push 44.0     ; ,
+2127: putc
+2128: push 44.0     ; ,
+2129: putc
+2130: push 59.0     ; ;
+2131: putc
+2132: push 39.0     ; '
+2133: putc
+2134: push 46.0     ; .
+2135: putc
+2136: push 46.0     ; .
+2137: putc
+2138: push 46.0     ; .
+2139: putc
+2140: push 46.0     ; .
+2141: putc
+2142: push 46.0     ; .
+2143: putc
+2144: push 46.0     ; .
+2145: putc
+2146: push 46.0     ; .
+2147: putc
+2148: push 46.0     ; .
+2149: putc
+2150: push 46.0     ; .
+2151: putc
+2152: push 46.0     ; .
+2153: putc
+2154: push 46.0     ; .
+2155: putc
+2156: push 46.0     ; .
+2157: putc
+2158: push 46.0     ; .
+2159: putc
+2160: push 32.0     ;  
+2161: putc
+2162: push 46.0     ; .
+2163: putc
+2164: push 46.0     ; .
+2165: putc
+2166: push 32.0     ;  
+2167: putc
+2168: push 120.0     ; x
+2169: putc
+2170: push 107.0     ; k
+2171: putc
+2172: push 120.0     ; x
+2173: putc
+2174: push 111.0     ; o
+2175: putc
+2176: push 59.0     ; ;
+2177: putc
+2178: push 46.0     ; .
+2179: putc
+2180: push 10.0
+2181: putc
+2182: push 32.0     ;  
+2183: putc
+2184: push 32.0     ;  
+2185: putc
+2186: push 32.0     ;  
+2187: putc
+2188: push 32.0     ;  
+2189: putc
+2190: push 32.0     ;  
+2191: putc
+2192: push 32.0     ;  
+2193: putc
+2194: push 32.0     ;  
+2195: putc
+2196: push 32.0     ;  
+2197: putc
+2198: push 39.0     ; '
+2199: putc
+2200: push 59.0     ; ;
+2201: putc
+2202: push 46.0     ; .
+2203: putc
+2204: push 32.0     ;  
+2205: putc
+2206: push 32.0     ;  
+2207: putc
+2208: push 32.0     ;  
+2209: putc
+2210: push 32.0     ;  
+2211: putc
+2212: push 32.0     ;  
+2213: putc
+2214: push 46.0     ; .
+2215: putc
+2216: push 58.0     ; :
+2217: putc
+2218: push 107.0     ; k
+2219: putc
+2220: push 79.0     ; O
+2221: putc
+2222: push 120.0     ; x
+2223: putc
+2224: push 111.0     ; o
+2225: putc
+2226: push 108.0     ; l
+2227: putc
+2228: push 108.0     ; l
+2229: putc
+2230: push 58.0     ; :
+2231: putc
+2232: push 59.0     ; ;
+2233: putc
+2234: push 59.0     ; ;
+2235: putc
+2236: push 59.0     ; ;
+2237: putc
+2238: push 59.0     ; ;
+2239: putc
+2240: push 59.0     ; ;
+2241: putc
+2242: push 44.0     ; ,
+2243: putc
+2244: push 44.0     ; ,
+2245: putc
+2246: push 59.0     ; ;
+2247: putc
+2248: push 44.0     ; ,
+2249: putc
+2250: push 46.0     ; .
+2251: putc
+2252: push 46.0     ; .
+2253: putc
+2254: push 39.0     ; '
+2255: putc
+2256: push 39.0     ; '
+2257: putc
+2258: push 39.0     ; '
+2259: putc
+2260: push 58.0     ; :
+2261: putc
+2262: push 111.0     ; o
+2263: putc
+2264: push 99.0     ; c
+2265: putc
+2266: push 44.0     ; ,
+2267: putc
+2268: push 46.0     ; .
+2269: putc
+2270: push 111.0     ; o
+2271: putc
+2272: push 120.0     ; x
+2273: putc
+2274: push 107.0     ; k
+2275: putc
+2276: push 100.0     ; d
+2277: putc
+2278: push 39.0     ; '
+2279: putc
+2280: push 32.0     ;  
+2281: putc
+2282: push 46.0     ; .
+2283: putc
+2284: push 46.0     ; .
+2285: putc
+2286: push 46.0     ; .
+2287: putc
+2288: push 46.0     ; .
+2289: putc
+2290: push 46.0     ; .
+2291: putc
+2292: push 46.0     ; .
+2293: putc
+2294: push 46.0     ; .
+2295: putc
+2296: push 46.0     ; .
+2297: putc
+2298: push 32.0     ;  
+2299: putc
+2300: push 46.0     ; .
+2301: putc
+2302: push 46.0     ; .
+2303: putc
+2304: push 46.0     ; .
+2305: putc
+2306: push 46.0     ; .
+2307: putc
+2308: push 46.0     ; .
+2309: putc
+2310: push 46.0     ; .
+2311: putc
+2312: push 32.0     ;  
+2313: putc
+2314: push 99.0     ; c
+2315: putc
+2316: push 120.0     ; x
+2317: putc
+2318: push 79.0     ; O
+2319: putc
+2320: push 48.0     ; 0
+2321: putc
+2322: push 120.0     ; x
+2323: putc
+2324: push 108.0     ; l
+2325: putc
+2326: push 39.0     ; '
+2327: putc
+2328: push 10.0
+2329: putc
+2330: push 32.0     ;  
+2331: putc
+2332: push 32.0     ;  
+2333: putc
+2334: push 32.0     ;  
+2335: putc
+2336: push 32.0     ;  
+2337: putc
+2338: push 32.0     ;  
+2339: putc
+2340: push 46.0     ; .
+2341: putc
+2342: push 58.0     ; :
+2343: putc
+2344: push 99.0     ; c
+2345: putc
+2346: push 59.0     ; ;
+2347: putc
+2348: push 44.0     ; ,
+2349: putc
+2350: push 58.0     ; :
+2351: putc
+2352: push 58.0     ; :
+2353: putc
+2354: push 46.0     ; .
+2355: putc
+2356: push 32.0     ;  
+2357: putc
+2358: push 59.0     ; ;
+2359: putc
+2360: push 120.0     ; x
+2361: putc
+2362: push 79.0     ; O
+2363: putc
+2364: push 107.0     ; k
+2365: putc
+2366: push 79.0     ; O
+2367: putc
+2368: push 79.0     ; O
+2369: putc
+2370: push 107.0     ; k
+2371: putc
+2372: push 100.0     ; d
+2373: putc
+2374: push 108.0     ; l
+2375: putc
+2376: push 58.0     ; :
+2377: putc
+2378: push 59.0     ; ;
+2379: putc
+2380: push 59.0     ; ;
+2381: putc
+2382: push 59.0     ; ;
+2383: putc
+2384: push 59.0     ; ;
+2385: putc
+2386: push 59.0     ; ;
+2387: putc
+2388: push 59.0     ; ;
+2389: putc
+2390: push 59.0     ; ;
+2391: putc
+2392: push 44.0     ; ,
+2393: putc
+2394: push 44.0     ; ,
+2395: putc
+2396: push 44.0     ; ,
+2397: putc
+2398: push 46.0     ; .
+2399: putc
+2400: push 46.0     ; .
+2401: putc
+2402: push 44.0     ; ,
+2403: putc
+2404: push 44.0     ; ,
+2405: putc
+2406: push 44.0     ; ,
+2407: putc
+2408: push 59.0     ; ;
+2409: putc
+2410: push 99.0     ; c
+2411: putc
+2412: push 59.0     ; ;
+2413: putc
+2414: push 39.0     ; '
+2415: putc
+2416: push 46.0     ; .
+2417: putc
+2418: push 100.0     ; d
+2419: putc
+2420: push 79.0     ; O
+2421: putc
+2422: push 79.0     ; O
+2423: putc
+2424: push 79.0     ; O
+2425: putc
+2426: push 39.0     ; '
+2427: putc
+2428: push 32.0     ;  
+2429: putc
+2430: push 46.0     ; .
+2431: putc
+2432: push 46.0     ; .
+2433: putc
+2434: push 46.0     ; .
+2435: putc
+2436: push 46.0     ; .
+2437: putc
+2438: push 46.0     ; .
+2439: putc
+2440: push 46.0     ; .
+2441: putc
+2442: push 46.0     ; .
+2443: putc
+2444: push 46.0     ; .
+2445: putc
+2446: push 46.0     ; .
+2447: putc
+2448: push 46.0     ; .
+2449: putc
+2450: push 46.0     ; .
+2451: putc
+2452: push 46.0     ; .
+2453: putc
+2454: push 39.0     ; '
+2455: putc
+2456: push 58.0     ; :
+2457: putc
+2458: push 108.0     ; l
+2459: putc
+2460: push 120.0     ; x
+2461: putc
+2462: push 79.0     ; O
+2463: putc
+2464: push 79.0     ; O
+2465: putc
+2466: push 120.0     ; x
+2467: putc
+2468: push 111.0     ; o
+2469: putc
+2470: push 99.0     ; c
+2471: putc
+2472: push 59.0     ; ;
+2473: putc
+2474: push 46.0     ; .
+2475: putc
+2476: push 10.0
+2477: putc
+2478: push 32.0     ;  
+2479: putc
+2480: push 32.0     ;  
+2481: putc
+2482: push 46.0     ; .
+2483: putc
+2484: push 58.0     ; :
+2485: putc
+2486: push 111.0     ; o
+2487: putc
+2488: push 99.0     ; c
+2489: putc
+2490: push 44.0     ; ,
+2491: putc
+2492: push 44.0     ; ,
+2493: putc
+2494: push 44.0     ; ,
+2495: putc
+2496: push 44.0     ; ,
+2497: putc
+2498: push 44.0     ; ,
+2499: putc
+2500: push 58.0     ; :
+2501: putc
+2502: push 100.0     ; d
+2503: putc
+2504: push 79.0     ; O
+2505: putc
+2506: push 48.0     ; 0
+2507: putc
+2508: push 79.0     ; O
+2509: putc
+2510: push 107.0     ; k
+2511: putc
+2512: push 111.0     ; o
+2513: putc
+2514: push 58.0     ; :
+2515: putc
+2516: push 59.0     ; ;
+2517: putc
+2518: push 59.0     ; ;
+2519: putc
+2520: push 59.0     ; ;
+2521: putc
+2522: push 59.0     ; ;
+2523: putc
+2524: push 59.0     ; ;
+2525: putc
+2526: push 59.0     ; ;
+2527: putc
+2528: push 59.0     ; ;
+2529: putc
+2530: push 59.0     ; ;
+2531: putc
+2532: push 44.0     ; ,
+2533: putc
+2534: push 44.0     ; ,
+2535: putc
+2536: push 44.0     ; ,
+2537: putc
+2538: push 44.0     ; ,
+2539: putc
+2540: push 44.0     ; ,
+2541: putc
+2542: push 44.0     ; ,
+2543: putc
+2544: push 44.0     ; ,
+2545: putc
+2546: push 46.0     ; .
+2547: putc
+2548: push 39.0     ; '
+2549: putc
+2550: push 44.0     ; ,
+2551: putc
+2552: push 44.0     ; ,
+2553: putc
+2554: push 59.0     ; ;
+2555: putc
+2556: push 59.0     ; ;
+2557: putc
+2558: push 59.0     ; ;
+2559: putc
+2560: push 44.0     ; ,
+2561: putc
+2562: push 46.0     ; .
+2563: putc
+2564: push 46.0     ; .
+2565: putc
+2566: push 58.0     ; :
+2567: putc
+2568: push 48.0     ; 0
+2569: putc
+2570: push 48.0     ; 0
+2571: putc
+2572: push 48.0     ; 0
+2573: putc
+2574: push 99.0     ; c
+2575: putc
+2576: push 32.0     ;  
+2577: putc
+2578: push 46.0     ; .
+2579: putc
+2580: push 46.0     ; .
+2581: putc
+2582: push 46.0     ; .
+2583: putc
+2584: push 46.0     ; .
+2585: putc
+2586: push 46.0     ; .
+2587: putc
+2588: push 46.0     ; .
+2589: putc
+2590: push 46.0     ; .
+2591: putc
+2592: push 46.0     ; .
+2593: putc
+2594: push 39.0     ; '
+2595: putc
+2596: push 59.0     ; ;
+2597: putc
+2598: push 99.0     ; c
+2599: putc
+2600: push 120.0     ; x
+2601: putc
+2602: push 79.0     ; O
+2603: putc
+2604: push 79.0     ; O
+2605: putc
+2606: push 120.0     ; x
+2607: putc
+2608: push 111.0     ; o
+2609: putc
+2610: push 99.0     ; c
+2611: putc
+2612: push 58.0     ; :
+2613: putc
+2614: push 59.0     ; ;
+2615: putc
+2616: push 59.0     ; ;
+2617: putc
+2618: push 59.0     ; ;
+2619: putc
+2620: push 59.0     ; ;
+2621: putc
+2622: push 46.0     ; .
+2623: putc
+2624: push 10.0
+2625: putc
+2626: push 44.0     ; ,
+2627: putc
+2628: push 111.0     ; o
+2629: putc
+2630: push 108.0     ; l
+2631: putc
+2632: push 58.0     ; :
+2633: putc
+2634: push 59.0     ; ;
+2635: putc
+2636: push 59.0     ; ;
+2637: putc
+2638: push 59.0     ; ;
+2639: putc
+2640: push 59.0     ; ;
+2641: putc
+2642: push 108.0     ; l
+2643: putc
+2644: push 120.0     ; x
+2645: putc
+2646: push 79.0     ; O
+2647: putc
+2648: push 48.0     ; 0
+2649: putc
+2650: push 107.0     ; k
+2651: putc
+2652: push 100.0     ; d
+2653: putc
+2654: push 108.0     ; l
+2655: putc
+2656: push 58.0     ; :
+2657: putc
+2658: push 59.0     ; ;
+2659: putc
+2660: push 59.0     ; ;
+2661: putc
+2662: push 44.0     ; ,
+2663: putc
+2664: push 44.0     ; ,
+2665: putc
+2666: push 59.0     ; ;
+2667: putc
+2668: push 44.0     ; ,
+2669: putc
+2670: push 44.0     ; ,
+2671: putc
+2672: push 44.0     ; ,
+2673: putc
+2674: push 44.0     ; ,
+2675: putc
+2676: push 44.0     ; ,
+2677: putc
+2678: push 44.0     ; ,
+2679: putc
+2680: push 44.0     ; ,
+2681: putc
+2682: push 44.0     ; ,
+2683: putc
+2684: push 44.0     ; ,
+2685: putc
+2686: push 44.0     ; ,
+2687: putc
+2688: push 44.0     ; ,
+2689: putc
+2690: push 58.0     ; :
+2691: putc
+2692: push 108.0     ; l
+2693: putc
+2694: push 46.0     ; .
+2695: putc
+2696: push 46.0     ; .
+2697: putc
+2698: push 44.0     ; ,
+2699: putc
+2700: push 44.0     ; ,
+2701: putc
+2702: push 44.0     ; ,
+2703: putc
+2704: push 44.0     ; ,
+2705: putc
+2706: push 44.0     ; ,
+2707: putc
+2708: push 44.0     ; ,
+2709: putc
+2710: push 44.0     ; ,
+2711: putc
+2712: push 44.0     ; ,
+2713: putc
+2714: push 44.0     ; ,
+2715: putc
+2716: push 120.0     ; x
+2717: putc
+2718: push 107.0     ; k
+2719: putc
+2720: push 79.0     ; O
+2721: putc
+2722: push 120.0     ; x
+2723: putc
+2724: push 46.0     ; .
+2725: putc
+2726: push 46.0     ; .
+2727: putc
+2728: push 46.0     ; .
+2729: putc
+2730: push 46.0     ; .
+2731: putc
+2732: push 46.0     ; .
+2733: putc
+2734: push 39.0     ; '
+2735: putc
+2736: push 58.0     ; :
+2737: putc
+2738: push 111.0     ; o
+2739: putc
+2740: push 107.0     ; k
+2741: putc
+2742: push 48.0     ; 0
+2743: putc
+2744: push 79.0     ; O
+2745: putc
+2746: push 120.0     ; x
+2747: putc
+2748: push 108.0     ; l
+2749: putc
+2750: push 99.0     ; c
+2751: putc
+2752: push 58.0     ; :
+2753: putc
+2754: push 59.0     ; ;
+2755: putc
+2756: push 59.0     ; ;
+2757: putc
+2758: push 59.0     ; ;
+2759: putc
+2760: push 59.0     ; ;
+2761: putc
+2762: push 59.0     ; ;
+2763: putc
+2764: push 59.0     ; ;
+2765: putc
+2766: push 59.0     ; ;
+2767: putc
+2768: push 44.0     ; ,
+2769: putc
+2770: push 46.0     ; .
+2771: putc
+2772: push 10.0
+2773: putc
+2774: push 46.0     ; .
+2775: putc
+2776: push 44.0     ; ,
+2777: putc
+2778: push 58.0     ; :
+2779: putc
+2780: push 58.0     ; :
+2781: putc
+2782: push 59.0     ; ;
+2783: putc
+2784: push 59.0     ; ;
+2785: putc
+2786: push 44.0     ; ,
+2787: putc
+2788: push 99.0     ; c
+2789: putc
+2790: push 100.0     ; d
+2791: putc
+2792: push 107.0     ; k
+2793: putc
+2794: push 79.0     ; O
+2795: putc
+2796: push 111.0     ; o
+2797: putc
+2798: push 58.0     ; :
+2799: putc
+2800: push 59.0     ; ;
+2801: putc
+2802: push 59.0     ; ;
+2803: putc
+2804: push 59.0     ; ;
+2805: putc
+2806: push 59.0     ; ;
+2807: putc
+2808: push 44.0     ; ,
+2809: putc
+2810: push 44.0     ; ,
+2811: putc
+2812: push 44.0     ; ,
+2813: putc
+2814: push 44.0     ; ,
+2815: putc
+2816: push 44.0     ; ,
+2817: putc
+2818: push 44.0     ; ,
+2819: putc
+2820: push 59.0     ; ;
+2821: putc
+2822: push 59.0     ; ;
+2823: putc
+2824: push 59.0     ; ;
+2825: putc
+2826: push 44.0     ; ,
+2827: putc
+2828: push 44.0     ; ,
+2829: putc
+2830: push 58.0     ; :
+2831: putc
+2832: push 108.0     ; l
+2833: putc
+2834: push 100.0     ; d
+2835: putc
+2836: push 107.0     ; k
+2837: putc
+2838: push 107.0     ; k
+2839: putc
+2840: push 120.0     ; x
+2841: putc
+2842: push 44.0     ; ,
+2843: putc
+2844: push 46.0     ; .
+2845: putc
+2846: push 46.0     ; .
+2847: putc
+2848: push 46.0     ; .
+2849: putc
+2850: push 39.0     ; '
+2851: putc
+2852: push 44.0     ; ,
+2853: putc
+2854: push 44.0     ; ,
+2855: putc
+2856: push 44.0     ; ,
+2857: putc
+2858: push 44.0     ; ,
+2859: putc
+2860: push 44.0     ; ,
+2861: putc
+2862: push 44.0     ; ,
+2863: putc
+2864: push 111.0     ; o
+2865: putc
+2866: push 79.0     ; O
+2867: putc
+2868: push 79.0     ; O
+2869: putc
+2870: push 107.0     ; k
+2871: putc
+2872: push 39.0     ; '
+2873: putc
+2874: push 46.0     ; .
+2875: putc
+2876: push 59.0     ; ;
+2877: putc
+2878: push 111.0     ; o
+2879: putc
+2880: push 107.0     ; k
+2881: putc
+2882: push 48.0     ; 0
+2883: putc
+2884: push 79.0     ; O
+2885: putc
+2886: push 120.0     ; x
+2887: putc
+2888: push 111.0     ; o
+2889: putc
+2890: push 99.0     ; c
+2891: putc
+2892: push 59.0     ; ;
+2893: putc
+2894: push 59.0     ; ;
+2895: putc
+2896: push 44.0     ; ,
+2897: putc
+2898: push 59.0     ; ;
+2899: putc
+2900: push 59.0     ; ;
+2901: putc
+2902: push 59.0     ; ;
+2903: putc
+2904: push 59.0     ; ;
+2905: putc
+2906: push 59.0     ; ;
+2907: putc
+2908: push 44.0     ; ,
+2909: putc
+2910: push 44.0     ; ,
+2911: putc
+2912: push 44.0     ; ,
+2913: putc
+2914: push 44.0     ; ,
+2915: putc
+2916: push 44.0     ; ,
+2917: putc
+2918: push 46.0     ; .
+2919: putc
+2920: push 10.0
+2921: putc
+2922: push 32.0     ;  
+2923: putc
+2924: push 32.0     ;  
+2925: putc
+2926: push 32.0     ;  
+2927: putc
+2928: push 46.0     ; .
+2929: putc
+2930: push 58.0     ; :
+2931: putc
+2932: push 59.0     ; ;
+2933: putc
+2934: push 59.0     ; ;
+2935: putc
+2936: push 58.0     ; :
+2937: putc
+2938: push 100.0     ; d
+2939: putc
+2940: push 120.0     ; x
+2941: putc
+2942: push 107.0     ; k
+2943: putc
+2944: push 107.0     ; k
+2945: putc
+2946: push 107.0     ; k
+2947: putc
+2948: push 107.0     ; k
+2949: putc
+2950: push 120.0     ; x
+2951: putc
+2952: push 108.0     ; l
+2953: putc
+2954: push 59.0     ; ;
+2955: putc
+2956: push 44.0     ; ,
+2957: putc
+2958: push 44.0     ; ,
+2959: putc
+2960: push 44.0     ; ,
+2961: putc
+2962: push 44.0     ; ,
+2963: putc
+2964: push 44.0     ; ,
+2965: putc
+2966: push 44.0     ; ,
+2967: putc
+2968: push 59.0     ; ;
+2969: putc
+2970: push 58.0     ; :
+2971: putc
+2972: push 108.0     ; l
+2973: putc
+2974: push 100.0     ; d
+2975: putc
+2976: push 107.0     ; k
+2977: putc
+2978: push 107.0     ; k
+2979: putc
+2980: push 79.0     ; O
+2981: putc
+2982: push 107.0     ; k
+2983: putc
+2984: push 107.0     ; k
+2985: putc
+2986: push 107.0     ; k
+2987: putc
+2988: push 107.0     ; k
+2989: putc
+2990: push 107.0     ; k
+2991: putc
+2992: push 107.0     ; k
+2993: putc
+2994: push 111.0     ; o
+2995: putc
+2996: push 58.0     ; :
+2997: putc
+2998: push 39.0     ; '
+2999: putc
+3000: push 46.0     ; .
+3001: putc
+3002: push 46.0     ; .
+3003: putc
+3004: push 46.0     ; .
+3005: putc
+3006: push 39.0     ; '
+3007: putc
+3008: push 44.0     ; ,
+3009: putc
+3010: push 44.0     ; ,
+3011: putc
+3012: push 59.0     ; ;
+3013: putc
+3014: push 48.0     ; 0
+3015: putc
+3016: push 79.0     ; O
+3017: putc
+3018: push 120.0     ; x
+3019: putc
+3020: push 120.0     ; x
+3021: putc
+3022: push 79.0     ; O
+3023: putc
+3024: push 79.0     ; O
+3025: putc
+3026: push 120.0     ; x
+3027: putc
+3028: push 111.0     ; o
+3029: putc
+3030: push 99.0     ; c
+3031: putc
+3032: push 58.0     ; :
+3033: putc
+3034: push 59.0     ; ;
+3035: putc
+3036: push 59.0     ; ;
+3037: putc
+3038: push 59.0     ; ;
+3039: putc
+3040: push 59.0     ; ;
+3041: putc
+3042: push 59.0     ; ;
+3043: putc
+3044: push 44.0     ; ,
+3045: putc
+3046: push 44.0     ; ,
+3047: putc
+3048: push 44.0     ; ,
+3049: putc
+3050: push 44.0     ; ,
+3051: putc
+3052: push 44.0     ; ,
+3053: putc
+3054: push 44.0     ; ,
+3055: putc
+3056: push 59.0     ; ;
+3057: putc
+3058: push 59.0     ; ;
+3059: putc
+3060: push 44.0     ; ,
+3061: putc
+3062: push 44.0     ; ,
+3063: putc
+3064: push 10.0
+3065: putc
+3066: push 32.0     ;  
+3067: putc
+3068: push 32.0     ;  
+3069: putc
+3070: push 32.0     ;  
+3071: putc
+3072: push 32.0     ;  
+3073: putc
+3074: push 32.0     ;  
+3075: putc
+3076: push 46.0     ; .
+3077: putc
+3078: push 59.0     ; ;
+3079: putc
+3080: push 58.0     ; :
+3081: putc
+3082: push 111.0     ; o
+3083: putc
+3084: push 111.0     ; o
+3085: putc
+3086: push 108.0     ; l
+3087: putc
+3088: push 108.0     ; l
+3089: putc
+3090: push 100.0     ; d
+3091: putc
+3092: push 120.0     ; x
+3093: putc
+3094: push 107.0     ; k
+3095: putc
+3096: push 79.0     ; O
+3097: putc
+3098: push 48.0     ; 0
+3099: putc
+3100: push 79.0     ; O
+3101: putc
+3102: push 120.0     ; x
+3103: putc
+3104: push 108.0     ; l
+3105: putc
+3106: push 99.0     ; c
+3107: putc
+3108: push 108.0     ; l
+3109: putc
+3110: push 100.0     ; d
+3111: putc
+3112: push 107.0     ; k
+3113: putc
+3114: push 107.0     ; k
+3115: putc
+3116: push 79.0     ; O
+3117: putc
+3118: push 79.0     ; O
+3119: putc
+3120: push 107.0     ; k
+3121: putc
+3122: push 120.0     ; x
+3123: putc
+3124: push 120.0     ; x
+3125: putc
+3126: push 120.0     ; x
+3127: putc
+3128: push 107.0     ; k
+3129: putc
+3130: push 107.0     ; k
+3131: putc
+3132: push 120.0     ; x
+3133: putc
+3134: push 100.0     ; d
+3135: putc
+3136: push 100.0     ; d
+3137: putc
+3138: push 100.0     ; d
+3139: putc
+3140: push 120.0     ; x
+3141: putc
+3142: push 107.0     ; k
+3143: putc
+3144: push 107.0     ; k
+3145: putc
+3146: push 111.0     ; o
+3147: putc
+3148: push 99.0     ; c
+3149: putc
+3150: push 44.0     ; ,
+3151: putc
+3152: push 59.0     ; ;
+3153: putc
+3154: push 111.0     ; o
+3155: putc
+3156: push 107.0     ; k
+3157: putc
+3158: push 79.0     ; O
+3159: putc
+3160: push 48.0     ; 0
+3161: putc
+3162: push 107.0     ; k
+3163: putc
+3164: push 107.0     ; k
+3165: putc
+3166: push 108.0     ; l
+3167: putc
+3168: push 59.0     ; ;
+3169: putc
+3170: push 59.0     ; ;
+3171: putc
+3172: push 59.0     ; ;
+3173: putc
+3174: push 59.0     ; ;
+3175: putc
+3176: push 59.0     ; ;
+3177: putc
+3178: push 59.0     ; ;
+3179: putc
+3180: push 59.0     ; ;
+3181: putc
+3182: push 59.0     ; ;
+3183: putc
+3184: push 44.0     ; ,
+3185: putc
+3186: push 44.0     ; ,
+3187: putc
+3188: push 44.0     ; ,
+3189: putc
+3190: push 44.0     ; ,
+3191: putc
+3192: push 59.0     ; ;
+3193: putc
+3194: push 59.0     ; ;
+3195: putc
+3196: push 59.0     ; ;
+3197: putc
+3198: push 44.0     ; ,
+3199: putc
+3200: push 44.0     ; ,
+3201: putc
+3202: push 46.0     ; .
+3203: putc
+3204: push 10.0
+3205: putc
+3206: push 32.0     ;  
+3207: putc
+3208: push 32.0     ;  
+3209: putc
+3210: push 32.0     ;  
+3211: putc
+3212: push 32.0     ;  
+3213: putc
+3214: push 32.0     ;  
+3215: putc
+3216: push 32.0     ;  
+3217: putc
+3218: push 32.0     ;  
+3219: putc
+3220: push 46.0     ; .
+3221: putc
+3222: push 108.0     ; l
+3223: putc
+3224: push 108.0     ; l
+3225: putc
+3226: push 108.0     ; l
+3227: putc
+3228: push 99.0     ; c
+3229: putc
+3230: push 108.0     ; l
+3231: putc
+3232: push 111.0     ; o
+3233: putc
+3234: push 111.0     ; o
+3235: putc
+3236: push 111.0     ; o
+3237: putc
+3238: push 100.0     ; d
+3239: putc
+3240: push 120.0     ; x
+3241: putc
+3242: push 107.0     ; k
+3243: putc
+3244: push 79.0     ; O
+3245: putc
+3246: push 48.0     ; 0
+3247: putc
+3248: push 48.0     ; 0
+3249: putc
+3250: push 48.0     ; 0
+3251: putc
+3252: push 79.0     ; O
+3253: putc
+3254: push 107.0     ; k
+3255: putc
+3256: push 120.0     ; x
+3257: putc
+3258: push 120.0     ; x
+3259: putc
+3260: push 120.0     ; x
+3261: putc
+3262: push 107.0     ; k
+3263: putc
+3264: push 107.0     ; k
+3265: putc
+3266: push 120.0     ; x
+3267: putc
+3268: push 100.0     ; d
+3269: putc
+3270: push 100.0     ; d
+3271: putc
+3272: push 100.0     ; d
+3273: putc
+3274: push 120.0     ; x
+3275: putc
+3276: push 107.0     ; k
+3277: putc
+3278: push 107.0     ; k
+3279: putc
+3280: push 107.0     ; k
+3281: putc
+3282: push 107.0     ; k
+3283: putc
+3284: push 79.0     ; O
+3285: putc
+3286: push 48.0     ; 0
+3287: putc
+3288: push 79.0     ; O
+3289: putc
+3290: push 107.0     ; k
+3291: putc
+3292: push 107.0     ; k
+3293: putc
+3294: push 120.0     ; x
+3295: putc
+3296: push 111.0     ; o
+3297: putc
+3298: push 111.0     ; o
+3299: putc
+3300: push 48.0     ; 0
+3301: putc
+3302: push 79.0     ; O
+3303: putc
+3304: push 79.0     ; O
+3305: putc
+3306: push 111.0     ; o
+3307: putc
+3308: push 59.0     ; ;
+3309: putc
+3310: push 59.0     ; ;
+3311: putc
+3312: push 59.0     ; ;
+3313: putc
+3314: push 44.0     ; ,
+3315: putc
+3316: push 44.0     ; ,
+3317: putc
+3318: push 44.0     ; ,
+3319: putc
+3320: push 44.0     ; ,
+3321: putc
+3322: push 44.0     ; ,
+3323: putc
+3324: push 59.0     ; ;
+3325: putc
+3326: push 59.0     ; ;
+3327: putc
+3328: push 59.0     ; ;
+3329: putc
+3330: push 44.0     ; ,
+3331: putc
+3332: push 44.0     ; ,
+3333: putc
+3334: push 44.0     ; ,
+3335: putc
+3336: push 44.0     ; ,
+3337: putc
+3338: push 59.0     ; ;
+3339: putc
+3340: push 39.0     ; '
+3341: putc
+3342: push 46.0     ; .
+3343: putc
+3344: push 10.0
+3345: putc
+3346: push 32.0     ;  
+3347: putc
+3348: push 32.0     ;  
+3349: putc
+3350: push 32.0     ;  
+3351: putc
+3352: push 32.0     ;  
+3353: putc
+3354: push 32.0     ;  
+3355: putc
+3356: push 32.0     ;  
+3357: putc
+3358: push 32.0     ;  
+3359: putc
+3360: push 46.0     ; .
+3361: putc
+3362: push 108.0     ; l
+3363: putc
+3364: push 108.0     ; l
+3365: putc
+3366: push 99.0     ; c
+3367: putc
+3368: push 99.0     ; c
+3369: putc
+3370: push 108.0     ; l
+3371: putc
+3372: push 108.0     ; l
+3373: putc
+3374: push 111.0     ; o
+3375: putc
+3376: push 111.0     ; o
+3377: putc
+3378: push 111.0     ; o
+3379: putc
+3380: push 111.0     ; o
+3381: putc
+3382: push 111.0     ; o
+3383: putc
+3384: push 111.0     ; o
+3385: putc
+3386: push 100.0     ; d
+3387: putc
+3388: push 120.0     ; x
+3389: putc
+3390: push 107.0     ; k
+3391: putc
+3392: push 79.0     ; O
+3393: putc
+3394: push 48.0     ; 0
+3395: putc
+3396: push 48.0     ; 0
+3397: putc
+3398: push 79.0     ; O
+3399: putc
+3400: push 120.0     ; x
+3401: putc
+3402: push 100.0     ; d
+3403: putc
+3404: push 100.0     ; d
+3405: putc
+3406: push 100.0     ; d
+3407: putc
+3408: push 120.0     ; x
+3409: putc
+3410: push 107.0     ; k
+3411: putc
+3412: push 79.0     ; O
+3413: putc
+3414: push 79.0     ; O
+3415: putc
+3416: push 79.0     ; O
+3417: putc
+3418: push 48.0     ; 0
+3419: putc
+3420: push 48.0     ; 0
+3421: putc
+3422: push 79.0     ; O
+3423: putc
+3424: push 79.0     ; O
+3425: putc
+3426: push 120.0     ; x
+3427: putc
+3428: push 111.0     ; o
+3429: putc
+3430: push 99.0     ; c
+3431: putc
+3432: push 59.0     ; ;
+3433: putc
+3434: push 59.0     ; ;
+3435: putc
+3436: push 59.0     ; ;
+3437: putc
+3438: push 59.0     ; ;
+3439: putc
+3440: push 79.0     ; O
+3441: putc
+3442: push 79.0     ; O
+3443: putc
+3444: push 79.0     ; O
+3445: putc
+3446: push 107.0     ; k
+3447: putc
+3448: push 44.0     ; ,
+3449: putc
+3450: push 44.0     ; ,
+3451: putc
+3452: push 44.0     ; ,
+3453: putc
+3454: push 44.0     ; ,
+3455: putc
+3456: push 59.0     ; ;
+3457: putc
+3458: push 59.0     ; ;
+3459: putc
+3460: push 59.0     ; ;
+3461: putc
+3462: push 44.0     ; ,
+3463: putc
+3464: push 44.0     ; ,
+3465: putc
+3466: push 44.0     ; ,
+3467: putc
+3468: push 44.0     ; ,
+3469: putc
+3470: push 44.0     ; ,
+3471: putc
+3472: push 44.0     ; ,
+3473: putc
+3474: push 46.0     ; .
+3475: putc
+3476: push 46.0     ; .
+3477: putc
+3478: push 10.0
+3479: putc
+3480: push 32.0     ;  
+3481: putc
+3482: push 32.0     ;  
+3483: putc
+3484: push 32.0     ;  
+3485: putc
+3486: push 32.0     ;  
+3487: putc
+3488: push 32.0     ;  
+3489: putc
+3490: push 32.0     ;  
+3491: putc
+3492: push 32.0     ;  
+3493: putc
+3494: push 46.0     ; .
+3495: putc
+3496: push 108.0     ; l
+3497: putc
+3498: push 108.0     ; l
+3499: putc
+3500: push 111.0     ; o
+3501: putc
+3502: push 108.0     ; l
+3503: putc
+3504: push 108.0     ; l
+3505: putc
+3506: push 99.0     ; c
+3507: putc
+3508: push 99.0     ; c
+3509: putc
+3510: push 99.0     ; c
+3511: putc
+3512: push 108.0     ; l
+3513: putc
+3514: push 111.0     ; o
+3515: putc
+3516: push 111.0     ; o
+3517: putc
+3518: push 111.0     ; o
+3519: putc
+3520: push 108.0     ; l
+3521: putc
+3522: push 111.0     ; o
+3523: putc
+3524: push 111.0     ; o
+3525: putc
+3526: push 111.0     ; o
+3527: putc
+3528: push 100.0     ; d
+3529: putc
+3530: push 100.0     ; d
+3531: putc
+3532: push 120.0     ; x
+3533: putc
+3534: push 107.0     ; k
+3535: putc
+3536: push 79.0     ; O
+3537: putc
+3538: push 48.0     ; 0
+3539: putc
+3540: push 107.0     ; k
+3541: putc
+3542: push 120.0     ; x
+3543: putc
+3544: push 79.0     ; O
+3545: putc
+3546: push 79.0     ; O
+3547: putc
+3548: push 79.0     ; O
+3549: putc
+3550: push 79.0     ; O
+3551: putc
+3552: push 120.0     ; x
+3553: putc
+3554: push 111.0     ; o
+3555: putc
+3556: push 99.0     ; c
+3557: putc
+3558: push 59.0     ; ;
+3559: putc
+3560: push 59.0     ; ;
+3561: putc
+3562: push 59.0     ; ;
+3563: putc
+3564: push 44.0     ; ,
+3565: putc
+3566: push 44.0     ; ,
+3567: putc
+3568: push 59.0     ; ;
+3569: putc
+3570: push 59.0     ; ;
+3571: putc
+3572: push 44.0     ; ,
+3573: putc
+3574: push 100.0     ; d
+3575: putc
+3576: push 48.0     ; 0
+3577: putc
+3578: push 79.0     ; O
+3579: putc
+3580: push 107.0     ; k
+3581: putc
+3582: push 58.0     ; :
+3583: putc
+3584: push 44.0     ; ,
+3585: putc
+3586: push 44.0     ; ,
+3587: putc
+3588: push 44.0     ; ,
+3589: putc
+3590: push 44.0     ; ,
+3591: putc
+3592: push 44.0     ; ,
+3593: putc
+3594: push 44.0     ; ,
+3595: putc
+3596: push 39.0     ; '
+3597: putc
+3598: push 39.0     ; '
+3599: putc
+3600: push 46.0     ; .
+3601: putc
+3602: push 46.0     ; .
+3603: putc
+3604: push 10.0
+3605: putc
+3606: push 32.0     ;  
+3607: putc
+3608: push 32.0     ;  
+3609: putc
+3610: push 32.0     ;  
+3611: putc
+3612: push 32.0     ;  
+3613: putc
+3614: push 32.0     ;  
+3615: putc
+3616: push 32.0     ;  
+3617: putc
+3618: push 32.0     ;  
+3619: putc
+3620: push 32.0     ;  
+3621: putc
+3622: push 32.0     ;  
+3623: putc
+3624: push 46.0     ; .
+3625: putc
+3626: push 59.0     ; ;
+3627: putc
+3628: push 108.0     ; l
+3629: putc
+3630: push 108.0     ; l
+3631: putc
+3632: push 108.0     ; l
+3633: putc
+3634: push 108.0     ; l
+3635: putc
+3636: push 111.0     ; o
+3637: putc
+3638: push 108.0     ; l
+3639: putc
+3640: push 108.0     ; l
+3641: putc
+3642: push 99.0     ; c
+3643: putc
+3644: push 99.0     ; c
+3645: putc
+3646: push 108.0     ; l
+3647: putc
+3648: push 108.0     ; l
+3649: putc
+3650: push 111.0     ; o
+3651: putc
+3652: push 111.0     ; o
+3653: putc
+3654: push 111.0     ; o
+3655: putc
+3656: push 99.0     ; c
+3657: putc
+3658: push 111.0     ; o
+3659: putc
+3660: push 111.0     ; o
+3661: putc
+3662: push 100.0     ; d
+3663: putc
+3664: push 99.0     ; c
+3665: putc
+3666: push 59.0     ; ;
+3667: putc
+3668: push 99.0     ; c
+3669: putc
+3670: push 111.0     ; o
+3671: putc
+3672: push 100.0     ; d
+3673: putc
+3674: push 99.0     ; c
+3675: putc
+3676: push 59.0     ; ;
+3677: putc
+3678: push 59.0     ; ;
+3679: putc
+3680: push 59.0     ; ;
+3681: putc
+3682: push 59.0     ; ;
+3683: putc
+3684: push 59.0     ; ;
+3685: putc
+3686: push 59.0     ; ;
+3687: putc
+3688: push 59.0     ; ;
+3689: putc
+3690: push 44.0     ; ,
+3691: putc
+3692: push 44.0     ; ,
+3693: putc
+3694: push 44.0     ; ,
+3695: putc
+3696: push 44.0     ; ,
+3697: putc
+3698: push 44.0     ; ,
+3699: putc
+3700: push 58.0     ; :
+3701: putc
+3702: push 48.0     ; 0
+3703: putc
+3704: push 48.0     ; 0
+3705: putc
+3706: push 79.0     ; O
+3707: putc
+3708: push 100.0     ; d
+3709: putc
+3710: push 44.0     ; ,
+3711: putc
+3712: push 44.0     ; ,
+3713: putc
+3714: push 44.0     ; ,
+3715: putc
+3716: push 44.0     ; ,
+3717: putc
+3718: push 46.0     ; .
+3719: putc
+3720: push 46.0     ; .
+3721: putc
+3722: push 10.0
+3723: putc
+3724: push 32.0     ;  
+3725: putc
+3726: push 32.0     ;  
+3727: putc
+3728: push 32.0     ;  
+3729: putc
+3730: push 32.0     ;  
+3731: putc
+3732: push 32.0     ;  
+3733: putc
+3734: push 32.0     ;  
+3735: putc
+3736: push 32.0     ;  
+3737: putc
+3738: push 32.0     ;  
+3739: putc
+3740: push 32.0     ;  
+3741: putc
+3742: push 32.0     ;  
+3743: putc
+3744: push 46.0     ; .
+3745: putc
+3746: push 99.0     ; c
+3747: putc
+3748: push 108.0     ; l
+3749: putc
+3750: push 108.0     ; l
+3751: putc
+3752: push 99.0     ; c
+3753: putc
+3754: push 99.0     ; c
+3755: putc
+3756: push 108.0     ; l
+3757: putc
+3758: push 108.0     ; l
+3759: putc
+3760: push 108.0     ; l
+3761: putc
+3762: push 108.0     ; l
+3763: putc
+3764: push 108.0     ; l
+3765: putc
+3766: push 99.0     ; c
+3767: putc
+3768: push 99.0     ; c
+3769: putc
+3770: push 99.0     ; c
+3771: putc
+3772: push 108.0     ; l
+3773: putc
+3774: push 99.0     ; c
+3775: putc
+3776: push 108.0     ; l
+3777: putc
+3778: push 108.0     ; l
+3779: putc
+3780: push 111.0     ; o
+3781: putc
+3782: push 59.0     ; ;
+3783: putc
+3784: push 59.0     ; ;
+3785: putc
+3786: push 58.0     ; :
+3787: putc
+3788: push 108.0     ; l
+3789: putc
+3790: push 111.0     ; o
+3791: putc
+3792: push 59.0     ; ;
+3793: putc
+3794: push 59.0     ; ;
+3795: putc
+3796: push 59.0     ; ;
+3797: putc
+3798: push 59.0     ; ;
+3799: putc
+3800: push 44.0     ; ,
+3801: putc
+3802: push 44.0     ; ,
+3803: putc
+3804: push 44.0     ; ,
+3805: putc
+3806: push 44.0     ; ,
+3807: putc
+3808: push 44.0     ; ,
+3809: putc
+3810: push 59.0     ; ;
+3811: putc
+3812: push 59.0     ; ;
+3813: putc
+3814: push 44.0     ; ,
+3815: putc
+3816: push 44.0     ; ,
+3817: putc
+3818: push 44.0     ; ,
+3819: putc
+3820: push 120.0     ; x
+3821: putc
+3822: push 48.0     ; 0
+3823: putc
+3824: push 120.0     ; x
+3825: putc
+3826: push 100.0     ; d
+3827: putc
+3828: push 44.0     ; ,
+3829: putc
+3830: push 46.0     ; .
+3831: putc
+3832: push 10.0
+3833: putc
+3834: push 32.0     ;  
+3835: putc
+3836: push 32.0     ;  
+3837: putc
+3838: push 32.0     ;  
+3839: putc
+3840: push 32.0     ;  
+3841: putc
+3842: push 32.0     ;  
+3843: putc
+3844: push 32.0     ;  
+3845: putc
+3846: push 32.0     ;  
+3847: putc
+3848: push 32.0     ;  
+3849: putc
+3850: push 32.0     ;  
+3851: putc
+3852: push 32.0     ;  
+3853: putc
+3854: push 32.0     ;  
+3855: putc
+3856: push 32.0     ;  
+3857: putc
+3858: push 32.0     ;  
+3859: putc
+3860: push 46.0     ; .
+3861: putc
+3862: push 44.0     ; ,
+3863: putc
+3864: push 58.0     ; :
+3865: putc
+3866: push 58.0     ; :
+3867: putc
+3868: push 99.0     ; c
+3869: putc
+3870: push 108.0     ; l
+3871: putc
+3872: push 108.0     ; l
+3873: putc
+3874: push 108.0     ; l
+3875: putc
+3876: push 108.0     ; l
+3877: putc
+3878: push 108.0     ; l
+3879: putc
+3880: push 111.0     ; o
+3881: putc
+3882: push 108.0     ; l
+3883: putc
+3884: push 99.0     ; c
+3885: putc
+3886: push 99.0     ; c
+3887: putc
+3888: push 99.0     ; c
+3889: putc
+3890: push 99.0     ; c
+3891: putc
+3892: push 44.0     ; ,
+3893: putc
+3894: push 44.0     ; ,
+3895: putc
+3896: push 59.0     ; ;
+3897: putc
+3898: push 99.0     ; c
+3899: putc
+3900: push 108.0     ; l
+3901: putc
+3902: push 59.0     ; ;
+3903: putc
+3904: push 44.0     ; ,
+3905: putc
+3906: push 44.0     ; ,
+3907: putc
+3908: push 44.0     ; ,
+3909: putc
+3910: push 59.0     ; ;
+3911: putc
+3912: push 59.0     ; ;
+3913: putc
+3914: push 59.0     ; ;
+3915: putc
+3916: push 44.0     ; ,
+3917: putc
+3918: push 44.0     ; ,
+3919: putc
+3920: push 44.0     ; ,
+3921: putc
+3922: push 44.0     ; ,
+3923: putc
+3924: push 59.0     ; ;
+3925: putc
+3926: push 59.0     ; ;
+3927: putc
+3928: push 44.0     ; ,
+3929: putc
+3930: push 58.0     ; :
+3931: putc
+3932: push 107.0     ; k
+3933: putc
+3934: push 120.0     ; x
+3935: putc
+3936: push 120.0     ; x
+3937: putc
+3938: push 58.0     ; :
+3939: putc
+3940: push 10.0
+3941: putc
+3942: push 32.0     ;  
+3943: putc
+3944: push 32.0     ;  
+3945: putc
+3946: push 32.0     ;  
+3947: putc
+3948: push 32.0     ;  
+3949: putc
+3950: push 32.0     ;  
+3951: putc
+3952: push 32.0     ;  
+3953: putc
+3954: push 32.0     ;  
+3955: putc
+3956: push 32.0     ;  
+3957: putc
+3958: push 32.0     ;  
+3959: putc
+3960: push 32.0     ;  
+3961: putc
+3962: push 32.0     ;  
+3963: putc
+3964: push 32.0     ;  
+3965: putc
+3966: push 32.0     ;  
+3967: putc
+3968: push 32.0     ;  
+3969: putc
+3970: push 32.0     ;  
+3971: putc
+3972: push 32.0     ;  
+3973: putc
+3974: push 32.0     ;  
+3975: putc
+3976: push 46.0     ; .
+3977: putc
+3978: push 44.0     ; ,
+3979: putc
+3980: push 99.0     ; c
+3981: putc
+3982: push 108.0     ; l
+3983: putc
+3984: push 108.0     ; l
+3985: putc
+3986: push 108.0     ; l
+3987: putc
+3988: push 108.0     ; l
+3989: putc
+3990: push 108.0     ; l
+3991: putc
+3992: push 108.0     ; l
+3993: putc
+3994: push 111.0     ; o
+3995: putc
+3996: push 108.0     ; l
+3997: putc
+3998: push 99.0     ; c
+3999: putc
+4000: push 59.0     ; ;
+4001: putc
+4002: push 59.0     ; ;
+4003: putc
+4004: push 58.0     ; :
+4005: putc
+4006: push 108.0     ; l
+4007: putc
+4008: push 108.0     ; l
+4009: putc
+4010: push 59.0     ; ;
+4011: putc
+4012: push 59.0     ; ;
+4013: putc
+4014: push 59.0     ; ;
+4015: putc
+4016: push 59.0     ; ;
+4017: putc
+4018: push 44.0     ; ,
+4019: putc
+4020: push 44.0     ; ,
+4021: putc
+4022: push 44.0     ; ,
+4023: putc
+4024: push 39.0     ; '
+4025: putc
+4026: push 44.0     ; ,
+4027: putc
+4028: push 39.0     ; '
+4029: putc
+4030: push 46.0     ; .
+4031: putc
+4032: push 46.0     ; .
+4033: putc
+4034: push 32.0     ;  
+4035: putc
+4036: push 32.0     ;  
+4037: putc
+4038: push 32.0     ;  
+4039: putc
+4040: push 79.0     ; O
+4041: putc
+4042: push 79.0     ; O
+4043: putc
+4044: push 79.0     ; O
+4045: putc
+4046: push 79.0     ; O
+4047: putc
+4048: push 10.0
+4049: putc
+4050: push 32.0     ;  
+4051: putc
+4052: push 32.0     ;  
+4053: putc
+4054: push 32.0     ;  
+4055: putc
+4056: push 32.0     ;  
+4057: putc
+4058: push 32.0     ;  
+4059: putc
+4060: push 32.0     ;  
+4061: putc
+4062: push 32.0     ;  
+4063: putc
+4064: push 32.0     ;  
+4065: putc
+4066: push 32.0     ;  
+4067: putc
+4068: push 32.0     ;  
+4069: putc
+4070: push 32.0     ;  
+4071: putc
+4072: push 32.0     ;  
+4073: putc
+4074: push 32.0     ;  
+4075: putc
+4076: push 32.0     ;  
+4077: putc
+4078: push 32.0     ;  
+4079: putc
+4080: push 32.0     ;  
+4081: putc
+4082: push 32.0     ;  
+4083: putc
+4084: push 32.0     ;  
+4085: putc
+4086: push 32.0     ;  
+4087: putc
+4088: push 32.0     ;  
+4089: putc
+4090: push 32.0     ;  
+4091: putc
+4092: push 46.0     ; .
+4093: putc
+4094: push 44.0     ; ,
+4095: putc
+4096: push 99.0     ; c
+4097: putc
+4098: push 99.0     ; c
+4099: putc
+4100: push 58.0     ; :
+4101: putc
+4102: push 99.0     ; c
+4103: putc
+4104: push 99.0     ; c
+4105: putc
+4106: push 99.0     ; c
+4107: putc
+4108: push 59.0     ; ;
+4109: putc
+4110: push 59.0     ; ;
+4111: putc
+4112: push 59.0     ; ;
+4113: putc
+4114: push 58.0     ; :
+4115: putc
+4116: push 99.0     ; c
+4117: putc
+4118: push 59.0     ; ;
+4119: putc
+4120: push 44.0     ; ,
+4121: putc
+4122: push 44.0     ; ,
+4123: putc
+4124: push 44.0     ; ,
+4125: putc
+4126: push 44.0     ; ,
+4127: putc
+4128: push 39.0     ; '
+4129: putc
+4130: push 46.0     ; .
+4131: putc
+4132: push 32.0     ;  
+4133: putc
+4134: push 32.0     ;  
+4135: putc
+4136: push 32.0     ;  
+4137: putc
+4138: push 32.0     ;  
+4139: putc
+4140: push 32.0     ;  
+4141: putc
+4142: push 32.0     ;  
+4143: putc
+4144: push 32.0     ;  
+4145: putc
+4146: push 32.0     ;  
+4147: putc
+4148: push 99.0     ; c
+4149: putc
+4150: push 48.0     ; 0
+4151: putc
+4152: push 79.0     ; O
+4153: putc
+4154: push 48.0     ; 0
+4155: putc
+4156: push 44.0     ; ,
+4157: putc
+4158: push 10.0
+4159: putc
+4160: push 32.0     ;  
+4161: putc
+4162: push 32.0     ;  
+4163: putc
+4164: push 32.0     ;  
+4165: putc
+4166: push 32.0     ;  
+4167: putc
+4168: push 32.0     ;  
+4169: putc
+4170: push 32.0     ;  
+4171: putc
+4172: push 32.0     ;  
+4173: putc
+4174: push 32.0     ;  
+4175: putc
+4176: push 32.0     ;  
+4177: putc
+4178: push 32.0     ;  
+4179: putc
+4180: push 32.0     ;  
+4181: putc
+4182: push 32.0     ;  
+4183: putc
+4184: push 32.0     ;  
+4185: putc
+4186: push 32.0     ;  
+4187: putc
+4188: push 32.0     ;  
+4189: putc
+4190: push 32.0     ;  
+4191: putc
+4192: push 32.0     ;  
+4193: putc
+4194: push 32.0     ;  
+4195: putc
+4196: push 32.0     ;  
+4197: putc
+4198: push 32.0     ;  
+4199: putc
+4200: push 32.0     ;  
+4201: putc
+4202: push 32.0     ;  
+4203: putc
+4204: push 32.0     ;  
+4205: putc
+4206: push 32.0     ;  
+4207: putc
+4208: push 32.0     ;  
+4209: putc
+4210: push 46.0     ; .
+4211: putc
+4212: push 39.0     ; '
+4213: putc
+4214: push 99.0     ; c
+4215: putc
+4216: push 108.0     ; l
+4217: putc
+4218: push 108.0     ; l
+4219: putc
+4220: push 108.0     ; l
+4221: putc
+4222: push 58.0     ; :
+4223: putc
+4224: push 44.0     ; ,
+4225: putc
+4226: push 44.0     ; ,
+4227: putc
+4228: push 59.0     ; ;
+4229: putc
+4230: push 44.0     ; ,
+4231: putc
+4232: push 46.0     ; .
+4233: putc
+4234: push 46.0     ; .
+4235: putc
+4236: push 32.0     ;  
+4237: putc
+4238: push 32.0     ;  
+4239: putc
+4240: push 32.0     ;  
+4241: putc
+4242: push 32.0     ;  
+4243: putc
+4244: push 32.0     ;  
+4245: putc
+4246: push 32.0     ;  
+4247: putc
+4248: push 32.0     ;  
+4249: putc
+4250: push 32.0     ;  
+4251: putc
+4252: push 32.0     ;  
+4253: putc
+4254: push 32.0     ;  
+4255: putc
+4256: push 32.0     ;  
+4257: putc
+4258: push 46.0     ; .
+4259: putc
+4260: push 48.0     ; 0
+4261: putc
+4262: push 79.0     ; O
+4263: putc
+4264: push 48.0     ; 0
+4265: putc
+4266: push 120.0     ; x
+4267: putc
+4268: push 10.0
+4269: putc
+4270: push 32.0     ;  
+4271: putc
+4272: push 32.0     ;  
+4273: putc
+4274: push 32.0     ;  
+4275: putc
+4276: push 32.0     ;  
+4277: putc
+4278: push 32.0     ;  
+4279: putc
+4280: push 32.0     ;  
+4281: putc
+4282: push 32.0     ;  
+4283: putc
+4284: push 32.0     ;  
+4285: putc
+4286: push 32.0     ;  
+4287: putc
+4288: push 32.0     ;  
+4289: putc
+4290: push 32.0     ;  
+4291: putc
+4292: push 32.0     ;  
+4293: putc
+4294: push 32.0     ;  
+4295: putc
+4296: push 32.0     ;  
+4297: putc
+4298: push 32.0     ;  
+4299: putc
+4300: push 32.0     ;  
+4301: putc
+4302: push 32.0     ;  
+4303: putc
+4304: push 32.0     ;  
+4305: putc
+4306: push 32.0     ;  
+4307: putc
+4308: push 32.0     ;  
+4309: putc
+4310: push 32.0     ;  
+4311: putc
+4312: push 32.0     ;  
+4313: putc
+4314: push 32.0     ;  
+4315: putc
+4316: push 32.0     ;  
+4317: putc
+4318: push 32.0     ;  
+4319: putc
+4320: push 32.0     ;  
+4321: putc
+4322: push 32.0     ;  
+4323: putc
+4324: push 32.0     ;  
+4325: putc
+4326: push 32.0     ;  
+4327: putc
+4328: push 46.0     ; .
+4329: putc
+4330: push 44.0     ; ,
+4331: putc
+4332: push 59.0     ; ;
+4333: putc
+4334: push 46.0     ; .
+4335: putc
+4336: push 46.0     ; .
+4337: putc
+4338: push 32.0     ;  
+4339: putc
+4340: push 32.0     ;  
+4341: putc
+4342: push 32.0     ;  
+4343: putc
+4344: push 32.0     ;  
+4345: putc
+4346: push 32.0     ;  
+4347: putc
+4348: push 32.0     ;  
+4349: putc
+4350: push 32.0     ;  
+4351: putc
+4352: push 32.0     ;  
+4353: putc
+4354: push 32.0     ;  
+4355: putc
+4356: push 32.0     ;  
+4357: putc
+4358: push 32.0     ;  
+4359: putc
+4360: push 32.0     ;  
+4361: putc
+4362: push 32.0     ;  
+4363: putc
+4364: push 32.0     ;  
+4365: putc
+4366: push 32.0     ;  
+4367: putc
+4368: push 32.0     ;  
+4369: putc
+4370: push 44.0     ; ,
+4371: putc
+4372: push 44.0     ; ,
+4373: putc
+4374: push 120.0     ; x
+4375: putc
+4376: push 48.0     ; 0
+4377: putc
+4378: push 46.0     ; .
+4379: putc
+4380: push 10.0
+4381: putc
+4382: push 32.0     ;  
+4383: putc
+4384: push 32.0     ;  
+4385: putc
+4386: push 32.0     ;  
+4387: putc
+4388: push 32.0     ;  
+4389: putc
+4390: push 32.0     ;  
+4391: putc
+4392: push 32.0     ;  
+4393: putc
+4394: push 32.0     ;  
+4395: putc
+4396: push 32.0     ;  
+4397: putc
+4398: push 32.0     ;  
+4399: putc
+4400: push 32.0     ;  
+4401: putc
+4402: push 32.0     ;  
+4403: putc
+4404: push 32.0     ;  
+4405: putc
+4406: push 32.0     ;  
+4407: putc
+4408: push 32.0     ;  
+4409: putc
+4410: push 32.0     ;  
+4411: putc
+4412: push 32.0     ;  
+4413: putc
+4414: push 32.0     ;  
+4415: putc
+4416: push 32.0     ;  
+4417: putc
+4418: push 32.0     ;  
+4419: putc
+4420: push 32.0     ;  
+4421: putc
+4422: push 32.0     ;  
+4423: putc
+4424: push 32.0     ;  
+4425: putc
+4426: push 32.0     ;  
+4427: putc
+4428: push 32.0     ;  
+4429: putc
+4430: push 32.0     ;  
+4431: putc
+4432: push 32.0     ;  
+4433: putc
+4434: push 32.0     ;  
+4435: putc
+4436: push 32.0     ;  
+4437: putc
+4438: push 32.0     ;  
+4439: putc
+4440: push 32.0     ;  
+4441: putc
+4442: push 32.0     ;  
+4443: putc
+4444: push 32.0     ;  
+4445: putc
+4446: push 32.0     ;  
+4447: putc
+4448: push 32.0     ;  
+4449: putc
+4450: push 32.0     ;  
+4451: putc
+4452: push 32.0     ;  
+4453: putc
+4454: push 32.0     ;  
+4455: putc
+4456: push 32.0     ;  
+4457: putc
+4458: push 32.0     ;  
+4459: putc
+4460: push 32.0     ;  
+4461: putc
+4462: push 32.0     ;  
+4463: putc
+4464: push 32.0     ;  
+4465: putc
+4466: push 32.0     ;  
+4467: putc
+4468: push 32.0     ;  
+4469: putc
+4470: push 32.0     ;  
+4471: putc
+4472: push 32.0     ;  
+4473: putc
+4474: push 32.0     ;  
+4475: putc
+4476: push 32.0     ;  
+4477: putc
+4478: push 32.0     ;  
+4479: putc
+4480: push 32.0     ;  
+4481: putc
+4482: push 32.0     ;  
+4483: putc
+4484: push 32.0     ;  
+4485: putc
+4486: push 46.0     ; .
+4487: putc
+4488: push 59.0     ; ;
+4489: putc
+4490: push 46.0     ; .
+4491: putc
+4492: push 10.0
+4493: putc
+4494: push 32.0     ;  
+4495: putc
+4496: push 32.0     ;  
+4497: putc
+4498: push 32.0     ;  
+4499: putc
+4500: push 32.0     ;  
+4501: putc
+4502: push 32.0     ;  
+4503: putc
+4504: push 32.0     ;  
+4505: putc
+4506: push 32.0     ;  
+4507: putc
+4508: push 32.0     ;  
+4509: putc
+4510: push 32.0     ;  
+4511: putc
+4512: push 32.0     ;  
+4513: putc
+4514: push 32.0     ;  
+4515: putc
+4516: push 32.0     ;  
+4517: putc
+4518: push 32.0     ;  
+4519: putc
+4520: push 32.0     ;  
+4521: putc
+4522: push 32.0     ;  
+4523: putc
+4524: push 32.0     ;  
+4525: putc
+4526: push 32.0     ;  
+4527: putc
+4528: push 32.0     ;  
+4529: putc
+4530: push 32.0     ;  
+4531: putc
+4532: push 32.0     ;  
+4533: putc
+4534: push 32.0     ;  
+4535: putc
+4536: push 32.0     ;  
+4537: putc
+4538: push 32.0     ;  
+4539: putc
+4540: push 32.0     ;  
+4541: putc
+4542: push 32.0     ;  
+4543: putc
+4544: push 32.0     ;  
+4545: putc
+4546: push 32.0     ;  
+4547: putc
+4548: push 32.0     ;  
+4549: putc
+4550: push 32.0     ;  
+4551: putc
+4552: push 32.0     ;  
+4553: putc
+4554: push 32.0     ;  
+4555: putc
+4556: push 32.0     ;  
+4557: putc
+4558: push 32.0     ;  
+4559: putc
+4560: push 32.0     ;  
+4561: putc
+4562: push 32.0     ;  
+4563: putc
+4564: push 32.0     ;  
+4565: putc
+4566: push 32.0     ;  
+4567: putc
+4568: push 32.0     ;  
+4569: putc
+4570: push 32.0     ;  
+4571: putc
+4572: push 32.0     ;  
+4573: putc
+4574: push 32.0     ;  
+4575: putc
+4576: push 32.0     ;  
+4577: putc
+4578: push 32.0     ;  
+4579: putc
+4580: push 32.0     ;  
+4581: putc
+4582: push 32.0     ;  
+4583: putc
+4584: push 32.0     ;  
+4585: putc
+4586: push 32.0     ;  
+4587: putc
+4588: push 32.0     ;  
+4589: putc
+4590: push 32.0     ;  
+4591: putc
+4592: push 32.0     ;  
+4593: putc
+4594: push 32.0     ;  
+4595: putc
+4596: push 32.0     ;  
+4597: putc
+4598: push 32.0     ;  
+4599: putc
+4600: push 46.0     ; .
+4601: putc
+4602: push 46.0     ; .
+4603: putc
+4604: push 10.0
+4605: putc
+4606: push 27.0
+4607: putc
+4608: push 91.0     ; [
+4609: putc
+4610: push 48.0     ; 0
+4611: putc
+4612: push 109.0     ; m
+4613: putc
+4614: push 10.0
+4615: putc
+4616: push 32.0     ;  
+4617: putc
+4618: push 32.0     ;  
+4619: putc
+4620: push 32.0     ;  
+4621: putc
+4622: push 32.0     ;  
+4623: putc
+4624: push 32.0     ;  
+4625: putc
+4626: push 32.0     ;  
+4627: putc
+4628: push 32.0     ;  
+4629: putc
+4630: push 32.0     ;  
+4631: putc
+4632: push 32.0     ;  
+4633: putc
+4634: push 32.0     ;  
+4635: putc
+4636: push 32.0     ;  
+4637: putc
+4638: push 32.0     ;  
+4639: putc
+4640: push 32.0     ;  
+4641: putc
+4642: push 32.0     ;  
+4643: putc
+4644: push 32.0     ;  
+4645: putc
+4646: push 32.0     ;  
+4647: putc
+4648: push 95.0     ; _
+4649: putc
+4650: push 95.0     ; _
+4651: putc
+4652: push 95.0     ; _
+4653: putc
+4654: push 95.0     ; _
+4655: putc
+4656: push 32.0     ;  
+4657: putc
+4658: push 32.0     ;  
+4659: putc
+4660: push 32.0     ;  
+4661: putc
+4662: push 95.0     ; _
+4663: putc
+4664: push 95.0     ; _
+4665: putc
+4666: push 95.0     ; _
+4667: putc
+4668: push 32.0     ;  
+4669: putc
+4670: push 32.0     ;  
+4671: putc
+4672: push 32.0     ;  
+4673: putc
+4674: push 32.0     ;  
+4675: putc
+4676: push 95.0     ; _
+4677: putc
+4678: push 32.0     ;  
+4679: putc
+4680: push 32.0     ;  
+4681: putc
+4682: push 95.0     ; _
+4683: putc
+4684: push 95.0     ; _
+4685: putc
+4686: push 95.0     ; _
+4687: putc
+4688: push 95.0     ; _
+4689: putc
+4690: push 95.0     ; _
+4691: putc
+4692: push 32.0     ;  
+4693: putc
+4694: push 32.0     ;  
+4695: putc
+4696: push 32.0     ;  
+4697: putc
+4698: push 32.0     ;  
+4699: putc
+4700: push 32.0     ;  
+4701: putc
+4702: push 32.0     ;  
+4703: putc
+4704: push 32.0     ;  
+4705: putc
+4706: push 32.0     ;  
+4707: putc
+4708: push 95.0     ; _
+4709: putc
+4710: push 95.0     ; _
+4711: putc
+4712: push 32.0     ;  
+4713: putc
+4714: push 32.0     ;  
+4715: putc
+4716: push 32.0     ;  
+4717: putc
+4718: push 32.0     ;  
+4719: putc
+4720: push 32.0     ;  
+4721: putc
+4722: push 95.0     ; _
+4723: putc
+4724: push 95.0     ; _
+4725: putc
+4726: push 95.0     ; _
+4727: putc
+4728: push 95.0     ; _
+4729: putc
+4730: push 32.0     ;  
+4731: putc
+4732: push 32.0     ;  
+4733: putc
+4734: push 95.0     ; _
+4735: putc
+4736: push 95.0     ; _
+4737: putc
+4738: push 10.0
+4739: putc
+4740: push 32.0     ;  
+4741: putc
+4742: push 32.0     ;  
+4743: putc
+4744: push 32.0     ;  
+4745: putc
+4746: push 32.0     ;  
+4747: putc
+4748: push 32.0     ;  
+4749: putc
+4750: push 32.0     ;  
+4751: putc
+4752: push 32.0     ;  
+4753: putc
+4754: push 32.0     ;  
+4755: putc
+4756: push 32.0     ;  
+4757: putc
+4758: push 32.0     ;  
+4759: putc
+4760: push 32.0     ;  
+4761: putc
+4762: push 32.0     ;  
+4763: putc
+4764: push 32.0     ;  
+4765: putc
+4766: push 32.0     ;  
+4767: putc
+4768: push 32.0     ;  
+4769: putc
+4770: push 124.0     ; |
+4771: putc
+4772: push 32.0     ;  
+4773: putc
+4774: push 95.0     ; _
+4775: putc
+4776: push 95.0     ; _
+4777: putc
+4778: push 32.0     ;  
+4779: putc
+4780: push 41.0     ; )
+4781: putc
+4782: push 32.0     ;  
+4783: putc
+4784: push 47.0     ; /
+4785: putc
+4786: push 32.0     ;  
+4787: putc
+4788: push 95.0     ; _
+4789: putc
+4790: push 32.0     ;  
+4791: putc
+4792: push 92.0     ; \
+4793: putc
+4794: push 32.0     ;  
+4795: putc
+4796: push 32.0     ;  
+4797: putc
+4798: push 47.0     ; /
+4799: putc
+4800: push 32.0     ;  
+4801: putc
+4802: push 92.0     ; \
+4803: putc
+4804: push 124.0     ; |
+4805: putc
+4806: push 95.0     ; _
+4807: putc
+4808: push 32.0     ;  
+4809: putc
+4810: push 32.0     ;  
+4811: putc
+4812: push 32.0     ;  
+4813: putc
+4814: push 95.0     ; _
+4815: putc
+4816: push 124.0     ; |
+4817: putc
+4818: push 32.0     ;  
+4819: putc
+4820: push 32.0     ;  
+4821: putc
+4822: push 32.0     ;  
+4823: putc
+4824: push 32.0     ;  
+4825: putc
+4826: push 32.0     ;  
+4827: putc
+4828: push 32.0     ;  
+4829: putc
+4830: push 32.0     ;  
+4831: putc
+4832: push 92.0     ; \
+4833: putc
+4834: push 32.0     ;  
+4835: putc
+4836: push 92.0     ; \
+4837: putc
+4838: push 32.0     ;  
+4839: putc
+4840: push 32.0     ;  
+4841: putc
+4842: push 32.0     ;  
+4843: putc
+4844: push 47.0     ; /
+4845: putc
+4846: push 32.0     ;  
+4847: putc
+4848: push 47.0     ; /
+4849: putc
+4850: push 32.0     ;  
+4851: putc
+4852: push 32.0     ;  
+4853: putc
+4854: push 92.0     ; \
+4855: putc
+4856: push 47.0     ; /
+4857: putc
+4858: push 32.0     ;  
+4859: putc
+4860: push 32.0     ;  
+4861: putc
+4862: push 124.0     ; |
+4863: putc
+4864: push 10.0
+4865: putc
+4866: push 32.0     ;  
+4867: putc
+4868: push 32.0     ;  
+4869: putc
+4870: push 32.0     ;  
+4871: putc
+4872: push 32.0     ;  
+4873: putc
+4874: push 32.0     ;  
+4875: putc
+4876: push 32.0     ;  
+4877: putc
+4878: push 32.0     ;  
+4879: putc
+4880: push 32.0     ;  
+4881: putc
+4882: push 32.0     ;  
+4883: putc
+4884: push 32.0     ;  
+4885: putc
+4886: push 32.0     ;  
+4887: putc
+4888: push 32.0     ;  
+4889: putc
+4890: push 32.0     ;  
+4891: putc
+4892: push 32.0     ;  
+4893: putc
+4894: push 32.0     ;  
+4895: putc
+4896: push 124.0     ; |
+4897: putc
+4898: push 32.0     ;  
+4899: putc
+4900: push 32.0     ;  
+4901: putc
+4902: push 95.0     ; _
+4903: putc
+4904: push 32.0     ;  
+4905: putc
+4906: push 92.0     ; \
+4907: putc
+4908: push 124.0     ; |
+4909: putc
+4910: push 32.0     ;  
+4911: putc
+4912: push 124.0     ; |
+4913: putc
+4914: push 32.0     ;  
+4915: putc
+4916: push 124.0     ; |
+4917: putc
+4918: push 32.0     ;  
+4919: putc
+4920: push 124.0     ; |
+4921: putc
+4922: push 47.0     ; /
+4923: putc
+4924: push 32.0     ;  
+4925: putc
+4926: push 95.0     ; _
+4927: putc
+4928: push 32.0     ;  
+4929: putc
+4930: push 92.0     ; \
+4931: putc
+4932: push 32.0     ;  
+4933: putc
+4934: push 124.0     ; |
+4935: putc
+4936: push 32.0     ;  
+4937: putc
+4938: push 124.0     ; |
+4939: putc
+4940: push 32.0     ;  
+4941: putc
+4942: push 32.0     ;  
+4943: putc
+4944: push 32.0     ;  
+4945: putc
+4946: push 32.0     ;  
+4947: putc
+4948: push 32.0     ;  
+4949: putc
+4950: push 32.0     ;  
+4951: putc
+4952: push 32.0     ;  
+4953: putc
+4954: push 32.0     ;  
+4955: putc
+4956: push 32.0     ;  
+4957: putc
+4958: push 32.0     ;  
+4959: putc
+4960: push 92.0     ; \
+4961: putc
+4962: push 32.0     ;  
+4963: putc
+4964: push 92.0     ; \
+4965: putc
+4966: push 32.0     ;  
+4967: putc
+4968: push 47.0     ; /
+4969: putc
+4970: push 32.0     ;  
+4971: putc
+4972: push 47.0     ; /
+4973: putc
+4974: push 124.0     ; |
+4975: putc
+4976: push 32.0     ;  
+4977: putc
+4978: push 124.0     ; |
+4979: putc
+4980: push 92.0     ; \
+4981: putc
+4982: push 47.0     ; /
+4983: putc
+4984: push 124.0     ; |
+4985: putc
+4986: push 32.0     ;  
+4987: putc
+4988: push 124.0     ; |
+4989: putc
+4990: push 10.0
+4991: putc
+4992: push 32.0     ;  
+4993: putc
+4994: push 32.0     ;  
+4995: putc
+4996: push 32.0     ;  
+4997: putc
+4998: push 32.0     ;  
+4999: putc
+5000: push 32.0     ;  
+5001: putc
+5002: push 32.0     ;  
+5003: putc
+5004: push 32.0     ;  
+5005: putc
+5006: push 32.0     ;  
+5007: putc
+5008: push 32.0     ;  
+5009: putc
+5010: push 32.0     ;  
+5011: putc
+5012: push 32.0     ;  
+5013: putc
+5014: push 32.0     ;  
+5015: putc
+5016: push 32.0     ;  
+5017: putc
+5018: push 32.0     ;  
+5019: putc
+5020: push 32.0     ;  
+5021: putc
+5022: push 124.0     ; |
+5023: putc
+5024: push 32.0     ;  
+5025: putc
+5026: push 124.0     ; |
+5027: putc
+5028: push 95.0     ; _
+5029: putc
+5030: push 41.0     ; )
+5031: putc
+5032: push 32.0     ;  
+5033: putc
+5034: push 124.0     ; |
+5035: putc
+5036: push 32.0     ;  
+5037: putc
+5038: push 124.0     ; |
+5039: putc
+5040: push 95.0     ; _
+5041: putc
+5042: push 124.0     ; |
+5043: putc
+5044: push 32.0     ;  
+5045: putc
+5046: push 47.0     ; /
+5047: putc
+5048: push 32.0     ;  
+5049: putc
+5050: push 95.0     ; _
+5051: putc
+5052: push 95.0     ; _
+5053: putc
+5054: push 95.0     ; _
+5055: putc
+5056: push 32.0     ;  
+5057: putc
+5058: push 92.0     ; \
+5059: putc
+5060: push 124.0     ; |
+5061: putc
+5062: push 32.0     ;  
+5063: putc
+5064: push 124.0     ; |
+5065: putc
+5066: push 32.0     ;  
+5067: putc
+5068: push 32.0     ;  
+5069: putc
+5070: push 32.0     ;  
+5071: putc
+5072: push 32.0     ;  
+5073: putc
+5074: push 32.0     ;  
+5075: putc
+5076: push 32.0     ;  
+5077: putc
+5078: push 32.0     ;  
+5079: putc
+5080: push 32.0     ;  
+5081: putc
+5082: push 32.0     ;  
+5083: putc
+5084: push 32.0     ;  
+5085: putc
+5086: push 32.0     ;  
+5087: putc
+5088: push 92.0     ; \
+5089: putc
+5090: push 32.0     ;  
+5091: putc
+5092: push 86.0     ; V
+5093: putc
+5094: push 32.0     ;  
+5095: putc
+5096: push 47.0     ; /
+5097: putc
+5098: push 32.0     ;  
+5099: putc
+5100: push 124.0     ; |
+5101: putc
+5102: push 32.0     ;  
+5103: putc
+5104: push 124.0     ; |
+5105: putc
+5106: push 32.0     ;  
+5107: putc
+5108: push 32.0     ;  
+5109: putc
+5110: push 124.0     ; |
+5111: putc
+5112: push 32.0     ;  
+5113: putc
+5114: push 124.0     ; |
+5115: putc
+5116: push 10.0
+5117: putc
+5118: push 32.0     ;  
+5119: putc
+5120: push 32.0     ;  
+5121: putc
+5122: push 32.0     ;  
+5123: putc
+5124: push 32.0     ;  
+5125: putc
+5126: push 32.0     ;  
+5127: putc
+5128: push 32.0     ;  
+5129: putc
+5130: push 32.0     ;  
+5131: putc
+5132: push 32.0     ;  
+5133: putc
+5134: push 32.0     ;  
+5135: putc
+5136: push 32.0     ;  
+5137: putc
+5138: push 32.0     ;  
+5139: putc
+5140: push 32.0     ;  
+5141: putc
+5142: push 32.0     ;  
+5143: putc
+5144: push 32.0     ;  
+5145: putc
+5146: push 32.0     ;  
+5147: putc
+5148: push 124.0     ; |
+5149: putc
+5150: push 95.0     ; _
+5151: putc
+5152: push 95.0     ; _
+5153: putc
+5154: push 95.0     ; _
+5155: putc
+5156: push 95.0     ; _
+5157: putc
+5158: push 47.0     ; /
+5159: putc
+5160: push 32.0     ;  
+5161: putc
+5162: push 92.0     ; \
+5163: putc
+5164: push 95.0     ; _
+5165: putc
+5166: push 95.0     ; _
+5167: putc
+5168: push 95.0     ; _
+5169: putc
+5170: push 47.0     ; /
+5171: putc
+5172: push 95.0     ; _
+5173: putc
+5174: push 47.0     ; /
+5175: putc
+5176: push 32.0     ;  
+5177: putc
+5178: push 32.0     ;  
+5179: putc
+5180: push 32.0     ;  
+5181: putc
+5182: push 92.0     ; \
+5183: putc
+5184: push 95.0     ; _
+5185: putc
+5186: push 92.0     ; \
+5187: putc
+5188: push 95.0     ; _
+5189: putc
+5190: push 124.0     ; |
+5191: putc
+5192: push 32.0     ;  
+5193: putc
+5194: push 32.0     ;  
+5195: putc
+5196: push 32.0     ;  
+5197: putc
+5198: push 95.0     ; _
+5199: putc
+5200: push 95.0     ; _
+5201: putc
+5202: push 95.0     ; _
+5203: putc
+5204: push 95.0     ; _
+5205: putc
+5206: push 95.0     ; _
+5207: putc
+5208: push 32.0     ;  
+5209: putc
+5210: push 32.0     ;  
+5211: putc
+5212: push 32.0     ;  
+5213: putc
+5214: push 32.0     ;  
+5215: putc
+5216: push 92.0     ; \
+5217: putc
+5218: push 95.0     ; _
+5219: putc
+5220: push 47.0     ; /
+5221: putc
+5222: push 32.0     ;  
+5223: putc
+5224: push 32.0     ;  
+5225: putc
+5226: push 124.0     ; |
+5227: putc
+5228: push 95.0     ; _
+5229: putc
+5230: push 124.0     ; |
+5231: putc
+5232: push 32.0     ;  
+5233: putc
+5234: push 32.0     ;  
+5235: putc
+5236: push 124.0     ; |
+5237: putc
+5238: push 95.0     ; _
+5239: putc
+5240: push 124.0     ; |
+5241: putc
+5242: push 10.0
+5243: putc
+5244: push 32.0     ;  
+5245: putc
+5246: push 32.0     ;  
+5247: putc
+5248: push 32.0     ;  
+5249: putc
+5250: push 32.0     ;  
+5251: putc
+5252: push 32.0     ;  
+5253: putc
+5254: push 32.0     ;  
+5255: putc
+5256: push 32.0     ;  
+5257: putc
+5258: push 32.0     ;  
+5259: putc
+5260: push 32.0     ;  
+5261: putc
+5262: push 32.0     ;  
+5263: putc
+5264: push 32.0     ;  
+5265: putc
+5266: push 32.0     ;  
+5267: putc
+5268: push 32.0     ;  
+5269: putc
+5270: push 32.0     ;  
+5271: putc
+5272: push 32.0     ;  
+5273: putc
+5274: push 32.0     ;  
+5275: putc
+5276: push 32.0     ;  
+5277: putc
+5278: push 32.0     ;  
+5279: putc
+5280: push 32.0     ;  
+5281: putc
+5282: push 32.0     ;  
+5283: putc
+5284: push 32.0     ;  
+5285: putc
+5286: push 32.0     ;  
+5287: putc
+5288: push 32.0     ;  
+5289: putc
+5290: push 32.0     ;  
+5291: putc
+5292: push 32.0     ;  
+5293: putc
+5294: push 32.0     ;  
+5295: putc
+5296: push 32.0     ;  
+5297: putc
+5298: push 32.0     ;  
+5299: putc
+5300: push 32.0     ;  
+5301: putc
+5302: push 32.0     ;  
+5303: putc
+5304: push 32.0     ;  
+5305: putc
+5306: push 32.0     ;  
+5307: putc
+5308: push 32.0     ;  
+5309: putc
+5310: push 32.0     ;  
+5311: putc
+5312: push 32.0     ;  
+5313: putc
+5314: push 32.0     ;  
+5315: putc
+5316: push 32.0     ;  
+5317: putc
+5318: push 32.0     ;  
+5319: putc
+5320: push 32.0     ;  
+5321: putc
+5322: push 124.0     ; |
+5323: putc
+5324: push 95.0     ; _
+5325: putc
+5326: push 95.0     ; _
+5327: putc
+5328: push 95.0     ; _
+5329: putc
+5330: push 95.0     ; _
+5331: putc
+5332: push 95.0     ; _
+5333: putc
+5334: push 124.0     ; |
+5335: putc
+5336: push 10.0
+5337: putc
+5338: push 10.0
+5339: putc
+5340: push 10.0
+5341: putc
+5342: call 32
+5343: push 82.0     ; R
+5344: putc
+5345: push 117.0     ; u
+5346: putc
+5347: push 110.0     ; n
+5348: putc
+5349: push 110.0     ; n
+5350: putc
+5351: push 105.0     ; i
+5352: putc
+5353: push 110.0     ; n
+5354: putc
+5355: push 103.0     ; g
+5356: putc
+5357: push 32.0     ;  
+5358: putc
+5359: push 99.0     ; c
+5360: putc
+5361: push 111.0     ; o
+5362: putc
+5363: push 114.0     ; r
+5364: putc
+5365: push 67.0     ; C
+5366: putc
+5367: push 84.0     ; T
+5368: putc
+5369: push 70.0     ; F
+5370: putc
+5371: push 32.0     ;  
+5372: putc
+5373: push 102.0     ; f
+5374: putc
+5375: push 108.0     ; l
+5376: putc
+5377: push 97.0     ; a
+5378: putc
+5379: push 103.0     ; g
+5380: putc
+5381: push 32.0     ;  
+5382: putc
+5383: push 99.0     ; c
+5384: putc
+5385: push 114.0     ; r
+5386: putc
+5387: push 97.0     ; a
+5388: putc
+5389: push 99.0     ; c
+5390: putc
+5391: push 107.0     ; k
+5392: putc
+5393: push 101.0     ; e
+5394: putc
+5395: push 114.0     ; r
+5396: putc
+5397: push 46.0     ; .
+5398: putc
+5399: push 10.0
+5400: putc
+5401: push 10.0
+5402: putc
+5403: push 72.0     ; H
+5404: putc
+5405: push 97.0     ; a
+5406: putc
+5407: push 110.0     ; n
+5408: putc
+5409: push 103.0     ; g
+5410: putc
+5411: push 32.0     ;  
+5412: putc
+5413: push 116.0     ; t
+5414: putc
+5415: push 105.0     ; i
+5416: putc
+5417: push 103.0     ; g
+5418: putc
+5419: push 104.0     ; h
+5420: putc
+5421: push 116.0     ; t
+5422: putc
+5423: push 44.0     ; ,
+5424: putc
+5425: push 32.0     ;  
+5426: putc
+5427: push 73.0     ; I
+5428: putc
+5429: push 39.0     ; '
+5430: putc
+5431: push 109.0     ; m
+5432: putc
+5433: push 32.0     ;  
+5434: putc
+5435: push 117.0     ; u
+5436: putc
+5437: push 115.0     ; s
+5438: putc
+5439: push 105.0     ; i
+5440: putc
+5441: push 110.0     ; n
+5442: putc
+5443: push 103.0     ; g
+5444: putc
+5445: push 32.0     ;  
+5446: putc
+5447: push 104.0     ; h
+5448: putc
+5449: push 97.0     ; a
+5450: putc
+5451: push 114.0     ; r
+5452: putc
+5453: push 100.0     ; d
+5454: putc
+5455: push 119.0     ; w
+5456: putc
+5457: push 97.0     ; a
+5458: putc
+5459: push 114.0     ; r
+5460: putc
+5461: push 101.0     ; e
+5462: putc
+5463: push 32.0     ;  
+5464: putc
+5465: push 97.0     ; a
+5466: putc
+5467: push 99.0     ; c
+5468: putc
+5469: push 99.0     ; c
+5470: putc
+5471: push 101.0     ; e
+5472: putc
+5473: push 108.0     ; l
+5474: putc
+5475: push 101.0     ; e
+5476: putc
+5477: push 114.0     ; r
+5478: putc
+5479: push 97.0     ; a
+5480: putc
+5481: push 116.0     ; t
+5482: putc
+5483: push 105.0     ; i
+5484: putc
+5485: push 111.0     ; o
+5486: putc
+5487: push 110.0     ; n
+5488: putc
+5489: push 32.0     ;  
+5490: putc
+5491: push 116.0     ; t
+5492: putc
+5493: push 111.0     ; o
+5494: putc
+5495: push 32.0     ;  
+5496: putc
+5497: push 102.0     ; f
+5498: putc
+5499: push 117.0     ; u
+5500: putc
+5501: push 108.0     ; l
+5502: putc
+5503: push 102.0     ; f
+5504: putc
+5505: push 105.0     ; i
+5506: putc
+5507: push 108.0     ; l
+5508: putc
+5509: push 108.0     ; l
+5510: putc
+5511: push 32.0     ;  
+5512: putc
+5513: push 111.0     ; o
+5514: putc
+5515: push 117.0     ; u
+5516: putc
+5517: push 116.0     ; t
+5518: putc
+5519: push 32.0     ;  
+5520: putc
+5521: push 121.0     ; y
+5522: putc
+5523: push 111.0     ; o
+5524: putc
+5525: push 117.0     ; u
+5526: putc
+5527: push 114.0     ; r
+5528: putc
+5529: push 32.0     ;  
+5530: putc
+5531: push 114.0     ; r
+5532: putc
+5533: push 101.0     ; e
+5534: putc
+5535: push 113.0     ; q
+5536: putc
+5537: push 117.0     ; u
+5538: putc
+5539: push 101.0     ; e
+5540: putc
+5541: push 115.0     ; s
+5542: putc
+5543: push 116.0     ; t
+5544: putc
+5545: push 46.0     ; .
+5546: putc
+5547: push 46.0     ; .
+5548: putc
+5549: push 46.0     ; .
+5550: putc
+5551: push 10.0
+5552: putc
+5553: push 10.0
+5554: putc
+5555: push 20000000.0
+5556: dup
+5557: call 2
+5558: push 1.0
+5559: swap
+5560: clear_flags
+5561: div
+5562: pop
+5563: jmp_div0 pc+5
+5564: push -1.0
+5565: add
+5566: nop
+5567: jmp pc+-11
+5568: push 84.0     ; T
+5569: putc
+5570: push 104.0     ; h
+5571: putc
+5572: push 97.0     ; a
+5573: putc
+5574: push 110.0     ; n
+5575: putc
+5576: push 107.0     ; k
+5577: putc
+5578: push 115.0     ; s
+5579: putc
+5580: push 32.0     ;  
+5581: putc
+5582: push 102.0     ; f
+5583: putc
+5584: push 111.0     ; o
+5585: putc
+5586: push 114.0     ; r
+5587: putc
+5588: push 32.0     ;  
+5589: putc
+5590: push 119.0     ; w
+5591: putc
+5592: push 97.0     ; a
+5593: putc
+5594: push 105.0     ; i
+5595: putc
+5596: push 116.0     ; t
+5597: putc
+5598: push 105.0     ; i
+5599: putc
+5600: push 110.0     ; n
+5601: putc
+5602: push 103.0     ; g
+5603: putc
+5604: push 33.0     ; !
+5605: putc
+5606: push 32.0     ;  
+5607: putc
+5608: push 74.0     ; J
+5609: putc
+5610: push 117.0     ; u
+5611: putc
+5612: push 115.0     ; s
+5613: putc
+5614: push 116.0     ; t
+5615: putc
+5616: push 32.0     ;  
+5617: putc
+5618: push 97.0     ; a
+5619: putc
+5620: push 32.0     ;  
+5621: putc
+5622: push 98.0     ; b
+5623: putc
+5624: push 105.0     ; i
+5625: putc
+5626: push 116.0     ; t
+5627: putc
+5628: push 32.0     ;  
+5629: putc
+5630: push 108.0     ; l
+5631: putc
+5632: push 111.0     ; o
+5633: putc
+5634: push 110.0     ; n
+5635: putc
+5636: push 103.0     ; g
+5637: putc
+5638: push 101.0     ; e
+5639: putc
+5640: push 114.0     ; r
+5641: putc
+5642: push 46.0     ; .
+5643: putc
+5644: push 46.0     ; .
+5645: putc
+5646: push 46.0     ; .
+5647: putc
+5648: push 10.0
+5649: putc
+5650: push 10.0
+5651: putc
+5652: push 10000000.0
+5653: dup
+5654: call 2
+5655: push 1.0
+5656: swap
+5657: clear_flags
+5658: div
+5659: pop
+5660: jmp_div0 pc+5
+5661: push -1.0
+5662: add
+5663: nop
+5664: jmp pc+-11
+5665: push 69.0     ; E
+5666: putc
+5667: push 115.0     ; s
+5668: putc
+5669: push 116.0     ; t
+5670: putc
+5671: push 105.0     ; i
+5672: putc
+5673: push 109.0     ; m
+5674: putc
+5675: push 97.0     ; a
+5676: putc
+5677: push 116.0     ; t
+5678: putc
+5679: push 101.0     ; e
+5680: putc
+5681: push 100.0     ; d
+5682: putc
+5683: push 32.0     ;  
+5684: putc
+5685: push 116.0     ; t
+5686: putc
+5687: push 105.0     ; i
+5688: putc
+5689: push 109.0     ; m
+5690: putc
+5691: push 101.0     ; e
+5692: putc
+5693: push 32.0     ;  
+5694: putc
+5695: push 114.0     ; r
+5696: putc
+5697: push 101.0     ; e
+5698: putc
+5699: push 109.0     ; m
+5700: putc
+5701: push 97.0     ; a
+5702: putc
+5703: push 105.0     ; i
+5704: putc
+5705: push 110.0     ; n
+5706: putc
+5707: push 105.0     ; i
+5708: putc
+5709: push 110.0     ; n
+5710: putc
+5711: push 103.0     ; g
+5712: putc
+5713: push 58.0     ; :
+5714: putc
+5715: push 32.0     ;  
+5716: putc
+5717: push 2.2185312001337e+57
+5718: print_double
+5719: push 32.0     ;  
+5720: putc
+5721: push 115.0     ; s
+5722: putc
+5723: push 101.0     ; e
+5724: putc
+5725: push 99.0     ; c
+5726: putc
+5727: push 111.0     ; o
+5728: putc
+5729: push 110.0     ; n
+5730: putc
+5731: push 100.0     ; d
+5732: putc
+5733: push 115.0     ; s
+5734: putc
+5735: push 10.0
+5736: putc
+5737: push 10.0
+5738: putc
+5739: call 468
+5740: push 67.0     ; C
+5741: putc
+5742: push 114.0     ; r
+5743: putc
+5744: push 97.0     ; a
+5745: putc
+5746: push 99.0     ; c
+5747: putc
+5748: push 107.0     ; k
+5749: putc
+5750: push 101.0     ; e
+5751: putc
+5752: push 114.0     ; r
+5753: putc
+5754: push 32.0     ;  
+5755: putc
+5756: push 102.0     ; f
+5757: putc
+5758: push 105.0     ; i
+5759: putc
+5760: push 110.0     ; n
+5761: putc
+5762: push 105.0     ; i
+5763: putc
+5764: push 115.0     ; s
+5765: putc
+5766: push 104.0     ; h
+5767: putc
+5768: push 101.0     ; e
+5769: putc
+5770: push 100.0     ; d
+5771: putc
+5772: push 33.0     ; !
+5773: putc
+5774: push 10.0
+5775: putc
+5776: push 70.0     ; F
+5777: putc
+5778: push 111.0     ; o
+5779: putc
+5780: push 117.0     ; u
+5781: putc
+5782: push 110.0     ; n
+5783: putc
+5784: push 100.0     ; d
+5785: putc
+5786: push 32.0     ;  
+5787: putc
+5788: push 118.0     ; v
+5789: putc
+5790: push 105.0     ; i
+5791: putc
+5792: push 97.0     ; a
+5793: putc
+5794: push 98.0     ; b
+5795: putc
+5796: push 108.0     ; l
+5797: putc
+5798: push 101.0     ; e
+5799: putc
+5800: push 32.0     ;  
+5801: putc
+5802: push 115.0     ; s
+5803: putc
+5804: push 111.0     ; o
+5805: putc
+5806: push 108.0     ; l
+5807: putc
+5808: push 117.0     ; u
+5809: putc
+5810: push 116.0     ; t
+5811: putc
+5812: push 105.0     ; i
+5813: putc
+5814: push 111.0     ; o
+5815: putc
+5816: push 110.0     ; n
+5817: putc
+5818: push 58.0     ; :
+5819: putc
+5820: push 32.0     ;  
+5821: putc
+5822: print_double
+5823: push 10.0
+5824: putc
+5825: call 471
+5826: push 10.0
+5827: putc
+5828: push 70.0     ; F
+5829: putc
+5830: push 108.0     ; l
+5831: putc
+5832: push 97.0     ; a
+5833: putc
+5834: push 103.0     ; g
+5835: putc
+5836: push 58.0     ; :
+5837: putc
+5838: push 32.0     ;  
+5839: putc
+5840: push 10.0
+5841: putc
+5842: push 99.0     ; c
+5843: putc
+5844: push 111.0     ; o
+5845: putc
+5846: push 114.0     ; r
+5847: putc
+5848: push 99.0     ; c
+5849: putc
+5850: push 116.0     ; t
+5851: putc
+5852: push 102.0     ; f
+5853: putc
+5854: push 123.0     ; {
+5855: putc
+5856: push 103.0     ; g
+5857: putc
+5858: push 51.0     ; 3
+5859: putc
+5860: push 110.0     ; n
+5861: putc
+5862: push 116.0     ; t
+5863: putc
+5864: push 108.0     ; l
+5865: putc
+5866: push 121.0     ; y
+5867: putc
+5868: push 95.0     ; _
+5869: putc
+5870: push 100.0     ; d
+5871: putc
+5872: push 48.0     ; 0
+5873: putc
+5874: push 119.0     ; w
+5875: putc
+5876: push 110.0     ; n
+5877: putc
+5878: push 95.0     ; _
+5879: putc
+5880: push 116.0     ; t
+5881: putc
+5882: push 104.0     ; h
+5883: putc
+5884: push 51.0     ; 3
+5885: putc
+5886: push 95.0     ; _
+5887: putc
+5888: push 83.0     ; S
+5889: putc
+5890: push 116.0     ; t
+5891: putc
+5892: push 82.0     ; R
+5893: putc
+5894: push 51.0     ; 3
+5895: putc
+5896: push 65.0     ; A
+5897: putc
+5898: push 77.0     ; M
+5899: putc
+5900: push 95.0     ; _
+5901: putc
+5902: print_double
+5903: push 70.0     ; F
+5904: putc
+5905: push 80.0     ; P
+5906: putc
+5907: push 85.0     ; U
+5908: putc
+5909: push 95.0     ; _
+5910: putc
+5911: push 104.0     ; h
+5912: putc
+5913: push 52.0     ; 4
+5914: putc
+5915: push 99.0     ; c
+5916: putc
+5917: push 107.0     ; k
+5918: putc
+5919: push 115.0     ; s
+5920: putc
+5921: push 125.0     ; }
+5922: putc
+5923: push 10.0
+5924: putc
+5925: push 10.0
+5926: putc
+5927: push 84.0     ; T
+5928: putc
+5929: push 104.0     ; h
+5930: putc
+5931: push 97.0     ; a
+5932: putc
+5933: push 110.0     ; n
+5934: putc
+5935: push 107.0     ; k
+5936: putc
+5937: push 32.0     ;  
+5938: putc
+5939: push 121.0     ; y
+5940: putc
+5941: push 111.0     ; o
+5942: putc
+5943: push 117.0     ; u
+5944: putc
+5945: push 32.0     ;  
+5946: putc
+5947: push 102.0     ; f
+5948: putc
+5949: push 111.0     ; o
+5950: putc
+5951: push 114.0     ; r
+5952: putc
+5953: push 32.0     ;  
+5954: putc
+5955: push 121.0     ; y
+5956: putc
+5957: push 111.0     ; o
+5958: putc
+5959: push 117.0     ; u
+5960: putc
+5961: push 114.0     ; r
+5962: putc
+5963: push 32.0     ;  
+5964: putc
+5965: push 112.0     ; p
+5966: putc
+5967: push 97.0     ; a
+5968: putc
+5969: push 116.0     ; t
+5970: putc
+5971: push 105.0     ; i
+5972: putc
+5973: push 101.0     ; e
+5974: putc
+5975: push 110.0     ; n
+5976: putc
+5977: push 99.0     ; c
+5978: putc
+5979: push 101.0     ; e
+5980: putc
+5981: push 33.0     ; !
+5982: putc
+5983: push 10.0
+5984: putc
+5985: ret

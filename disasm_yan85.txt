@@ -1,5 +1,0 @@
-IMM, a, 0x40
-STM, *a, b
-LDM, b, *c
-CMP, a, s
-SYS, 0x20, b

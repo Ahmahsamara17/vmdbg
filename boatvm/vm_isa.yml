@@ -1,0 +1,259 @@
+vm_name: "boat_vm"
+byte_order: "little"
+
+# For this VM, instructions are stored as:
+#   [opcode(double)] [optional data(double)]
+# After parsing, you effectively have (opcode, data).
+fields_order: ["opcode", "data"]
+
+# No general-purpose registers; everything is stack-based.
+registers: {}
+
+instructions:
+  "0x00":
+    mnemonic: "PUSH_CONST"
+    enabled: true
+    length: 1
+    operands:
+      - { name: "value", kind: "imm", source: "data" }
+    semantics: "push immediate value onto the data stack"
+
+  "0x01":
+    mnemonic: "POP"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "pop top of data stack and discard"
+
+  "0x02":
+    mnemonic: "DUP"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "duplicate top of data stack"
+
+  "0x03":
+    mnemonic: "DUP2"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "duplicate top two stack values (…, a, b -> …, a, b, a, b)"
+
+  "0x04":
+    mnemonic: "DUP_X1"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "stack shuffle: …, a, b -> …, b, a, b"
+
+  "0x05":
+    mnemonic: "SWAP"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "swap top two stack values"
+
+  "0x06":
+    mnemonic: "NOP"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "no operation"
+
+  "0x07":
+    mnemonic: "ADD"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "pop b, pop a, push a + b"
+
+  "0x08":
+    mnemonic: "SUB"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "pop b, pop a, push a - b"
+
+  "0x09":
+    mnemonic: "MUL"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "pop b, pop a, push a * b"
+
+  "0x0a":
+    mnemonic: "DIV"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "pop b, pop a, push a / b (sets FPU exception flags)"
+
+  "0x0b":
+    mnemonic: "FLOOR"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "replace top of stack with floor(top)"
+
+  "0x0c":
+    mnemonic: "CEIL"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "replace top of stack with ceil(top)"
+
+  "0x0d":
+    mnemonic: "TRUNC"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "replace top of stack with trunc(top)"
+
+  "0x0e":
+    mnemonic: "ROUND"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "replace top of stack with round(top)"
+
+  "0x0f":
+    mnemonic: "ABS"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "replace top of stack with abs(top)"
+
+  "0x10":
+    mnemonic: "MIN"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "pop b, pop a, push min(a, b)"
+
+  "0x11":
+    mnemonic: "MAX"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "pop b, pop a, push max(a, b)"
+
+  "0x12":
+    mnemonic: "CLEAR_EXCEPT"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "clear FPU exception flags"
+
+  "0x13":
+    mnemonic: "B_DIVBYZERO"
+    enabled: true
+    length: 1
+    operands:
+      - { name: "offset", kind: "imm", source: "data" }
+    semantics: "if DIVBYZERO flag set: pc += offset; else pc++"
+
+  "0x14":
+    mnemonic: "B_INEXACT"
+    enabled: true
+    length: 1
+    operands:
+      - { name: "offset", kind: "imm", source: "data" }
+    semantics: "if INEXACT flag set: pc += offset; else pc++"
+
+  "0x15":
+    mnemonic: "B_INVALID"
+    enabled: true
+    length: 1
+    operands:
+      - { name: "offset", kind: "imm", source: "data" }
+    semantics: "if INVALID flag set: pc += offset; else pc++"
+
+  "0x16":
+    mnemonic: "B_OVERFLOW"
+    enabled: true
+    length: 1
+    operands:
+      - { name: "offset", kind: "imm", source: "data" }
+    semantics: "if OVERFLOW flag set: pc += offset; else pc++"
+
+  "0x17":
+    mnemonic: "B_UNDERFLOW"
+    enabled: true
+    length: 1
+    operands:
+      - { name: "offset", kind: "imm", source: "data" }
+    semantics: "if UNDERFLOW flag set: pc += offset; else pc++"
+
+  "0x18":
+    mnemonic: "B_ANY"
+    enabled: true
+    length: 1
+    operands:
+      - { name: "offset", kind: "imm", source: "data" }
+    semantics: "if any FPU exception flag set: pc += offset; else pc++"
+
+  "0x19":
+    mnemonic: "B_ALWAYS"
+    enabled: true
+    length: 1
+    operands:
+      - { name: "offset", kind: "imm", source: "data" }
+    semantics: "unconditional branch: pc += offset"
+
+  "0x1a":
+    mnemonic: "CALL"
+    enabled: true
+    length: 1
+    operands:
+      - { name: "target", kind: "imm", source: "data" }
+    semantics: "push return pc on call stack; pc = target"
+
+  "0x1b":
+    mnemonic: "RET"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "pop return pc from call stack; if empty, halt VM"
+
+  "0x1c":
+    mnemonic: "PRINT_FLOAT"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "pop top of stack and print as float"
+
+  "0x1d":
+    mnemonic: "PRINT_CHAR"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "pop top of stack, cast to char, print"
+
+  "0x1e":
+    mnemonic: "READ_FLOAT"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "read float from stdin and push"
+
+  "0x1f":
+    mnemonic: "READ_CHAR"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "read char from stdin (or EOF), push its numeric code"
+
+  "0x20":
+    mnemonic: "LOAD"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "pop address, push memory[address]"
+
+  "0x21":
+    mnemonic: "STORE"
+    enabled: true
+    length: 1
+    operands: []
+    semantics: "pop address, pop value, store value into memory[address]"
+

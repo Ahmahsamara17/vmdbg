@@ -1,0 +1,22 @@
+# vmdbg_config.yml
+
+isa_file: "./vm_isa.yml"
+
+bytecode:
+  file: "./yan85.bin"
+  base_offset: 0        
+  max_size: 0x1000      
+  entry_offset: 0       
+
+runtime:
+  dispatcher_symbol: "interpret_instruction"  
+  dispatcher_offset: 0x203e               
+  
+  vm_mem:
+    vm_stack: false
+    base_register: "rdi"       
+    regs_base_offset: 1024     
+    pc_reg: "i"
+
+disasm:
+  file: "./disasm_yan85.txt"

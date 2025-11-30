@@ -1,0 +1,16 @@
+{
+    "pluginmetadataversion": 2,
+    "name": "BoatVM",
+    "type": ["binaryview", "architecture"],
+    "api": ["python3"],
+    "description": "Binary Ninja plugin for Boat VM bytecode format",
+    "longdescription": "Provides disassembly and analysis support for Boat VM bytecode files",
+    "license": {
+        "name": "MIT",
+        "text": "Copyright (c) 2025"
+    },
+    "dependencies": {},
+    "version": "1.0.0",
+    "author": "Claude Code",
+    "minimumbinaryninjaversion": "3.0.0"
+}

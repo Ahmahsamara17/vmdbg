@@ -2,6 +2,7 @@
 import gdb
 import yaml
 import os
+import struct
 
 _vm_config = None
 _vm_state = {
@@ -27,10 +28,7 @@ def load_config(path="vmdbg_config.yml"):
 
 
 def load_isa_register_order():
-    """
-    Returns a list of VM register names in a stable order, based on vm_isa.yml.
-    Uses isa_file from vmdbg_config.yml or defaults to ./vm_isa.yml.
-    """
+    
     cfg = load_config()
     isa_path = cfg.get("isa_file", "./vm_isa.yml")
 
@@ -53,11 +51,7 @@ def load_isa_register_order():
 
 
 def read_vm_reg_byte(vm_base, reg_name):
-    """
-    Read one-byte VM register by name from VM memory.
-    Layout: regs_base_offset + index(reg_name) in ISA register order.
-    Returns int [0..255] or None on failure.
-    """
+    
     cfg = load_config()
     runtime_cfg = cfg.get("runtime", {})
     vm_mem_cfg = runtime_cfg.get("vm_mem", {})
@@ -131,12 +125,7 @@ class VmDispatcherBreakpoint(gdb.Breakpoint):
         return f"*0x{addr:x}"
 
     def _get_pie_base(self):
-        """
-        Return the base address of the main executable using:
-          - 'info files' to get the path
-          - 'info proc mappings' to find the mapping
-        Works on standard Linux GDB/GEF, no Progspace.executable_filename needed.
-        """
+        
         exe = None
         try:
             info_files = gdb.execute("info files", to_string=True)
@@ -199,31 +188,47 @@ class VmDispatcherBreakpoint(gdb.Breakpoint):
             except gdb.error as e:
                 gdb.write(f"[-] vmdbg: failed to read ${base_reg}: {e}\n", gdb.STDERR)
 
-        pc_reg_name = vm_mem_cfg.get("pc_reg")  
-        if pc_reg_name and _vm_state.get("vm_base") is not None:
-            pc_val = read_vm_reg_byte(_vm_state["vm_base"], pc_reg_name)
-            if pc_val is not None:
-                _vm_state["pc_index"] = pc_val
-            else:
-                _vm_state["pc_index"] = None
+        pc_index = None
+
+        if vm_mem_cfg.get("vm_stack", False):
+            vm_state_cfg = vm_mem_cfg.get("vm_state", {})
+            pc_cfg = vm_mem_cfg.get("pc", {})
+
+            symbol = vm_state_cfg.get("symbol")
+            field = pc_cfg.get("field")
+
+            if symbol and field:
+                try:
+                    pc_val = gdb.parse_and_eval(f"{symbol}.{field}")
+                    pc_index = int(pc_val)
+                except gdb.error as e:
+                    gdb.write(f"[-] vmdbg: failed to read VM pc field {symbol}.{field}: {e}\n", gdb.STDERR)
+                except (TypeError, ValueError):
+                    gdb.write(f"[-] vmdbg: non-integer VM pc value from {symbol}.{field}\n", gdb.STDERR)
+
+        if pc_index is None:
+            pc_reg_name = vm_mem_cfg.get("pc_reg")
+            if pc_reg_name and _vm_state.get("vm_base") is not None:
+                pc_val = read_vm_reg_byte(_vm_state["vm_base"], pc_reg_name)
+                if pc_val is not None:
+                    pc_index = pc_val
+
+        _vm_state["pc_index"] = pc_index
 
         gdb.write(f"[vmdbg] dispatcher hit #{_vm_state['step']}")
-        if _vm_state.get("pc_index") is not None:
-            gdb.write(f" (pc={_vm_state['pc_index']})")
+        if pc_index is not None:
+            gdb.write(f" (pc={pc_index})")
         gdb.write("\n")
 
         return True
+
 
 
 _vm_dispatch_bp = VmDispatcherBreakpoint()
 
 
 class ShowDisasm(gdb.Command):
-    """
-    vm-disasm
-    Print the precomputed yan85 disassembly stored in disasm.file
-    defined in vmdbg_config.yml, with an arrow at the current PC.
-    """
+    
 
     def __init__(self):
         super().__init__("vm-disasm", gdb.COMMAND_USER)
@@ -262,28 +267,33 @@ class ShowDisasm(gdb.Command):
 
         pc_idx = _vm_state.get("pc_index")
         if pc_idx is not None and 0 <= pc_idx < len(lines):
-            current_idx = pc_idx - 1
+            current_idx = pc_idx
         elif _vm_state.get("step", 0) > 0:
             current_idx = _vm_state["step"] - 1
         else:
             current_idx = None
 
-        for idx, text in enumerate(lines):
-            if current_idx is not None and idx == current_idx:
-                gdb.write("                  --> " + text + "\n")
-            else:
-                gdb.write("\t\t\t" + text + "\n")
+        if current_idx is not None:
+            start_idx = max(0, current_idx - 10)
+            end_idx = min(len(lines), current_idx + 10 + 1)
+            idx_range = range(start_idx, end_idx)
+        else:
+            idx_range = range(len(lines))
 
+        for idx in idx_range:
+            text = lines[idx]
+            instr_no = idx + 1  
+
+            if current_idx is not None and idx == current_idx:
+                gdb.write(f"{instr_no:6d}: --> {text}\n")
+            else:
+                gdb.write(f"{instr_no:6d}:     {text}\n")
 
 ShowDisasm()
 
 
 class VmRegs(gdb.Command):
-    """
-    vm-regs
-    Read the VM register block from VM memory and print a,b,c,d,s,i,f.
-    """
-
+    
     def __init__(self):
         super().__init__("vm-regs", gdb.COMMAND_USER)
 
@@ -324,3 +334,242 @@ class VmRegs(gdb.Command):
 
 VmRegs()
 
+
+class VmStackDump(gdb.Command):
+    
+    def __init__(self):
+        super().__init__("vm-stack-dump", gdb.COMMAND_USER)
+
+    def invoke(self, arg, from_tty):
+        cfg = load_config()
+        runtime_cfg = cfg.get("runtime", {})
+        vm_mem_cfg = runtime_cfg.get("vm_mem", {})
+
+        if not vm_mem_cfg.get("vm_stack", False):
+            gdb.write("[-] vmdbg: vm_stack is not enabled in vmdbg_config.yml\n", gdb.STDERR)
+            return
+
+        vm_state_cfg = vm_mem_cfg.get("vm_state", {})
+        stack_cfg = vm_mem_cfg.get("stack", {})
+
+        symbol = vm_state_cfg.get("symbol")
+        ptr_field = stack_cfg.get("ptr_field")
+        depth_field = stack_cfg.get("depth_field")
+
+        if not symbol or not ptr_field or not depth_field:
+            gdb.write("[-] vmdbg: vm_state.symbol, stack.ptr_field, or stack.depth_field not configured\n", gdb.STDERR)
+            return
+
+        try:
+            stack_ptr_val = gdb.parse_and_eval(f"{symbol}.{ptr_field}")
+            stack_depth_val = gdb.parse_and_eval(f"{symbol}.{depth_field}")
+        except gdb.error as e:
+            gdb.write(f"[-] vmdbg: failed to read stack fields from {symbol}: {e}\n", gdb.STDERR)
+            return
+
+        try:
+            stack_base = int(stack_ptr_val)
+            stack_depth = int(stack_depth_val)
+        except (TypeError, ValueError) as e:
+            gdb.write(f"[-] vmdbg: invalid stack pointer/depth values: {e}\n", gdb.STDERR)
+            return
+
+        if stack_base == 0:
+            gdb.write("[+] vmdbg: stack pointer is null\n")
+            return
+
+        sp_index = stack_depth - 1
+        if sp_index < 0:
+            gdb.write(f"[+] vmdbg: stack is empty (depth={stack_depth})\n")
+            return
+
+        max_to_dump = 20
+        inferior = gdb.selected_inferior()
+        elem_size = 8  
+
+        start_addr = stack_base + sp_index * elem_size
+
+        gdb.write(f"[+] vmdbg: dumping stack (20 qwords from TOS, depth={stack_depth}, tos_idx={sp_index})\n")
+
+        for i in range(0, max_to_dump, 2):
+            line_addr = start_addr + i * elem_size
+            gdb.write(f"0x{line_addr:016x}: ")
+
+            vals = []
+            for j in range(2):
+                if i + j >= max_to_dump:
+                    break
+                addr = line_addr + j * elem_size
+                try:
+                    mem = inferior.read_memory(addr, elem_size)
+                    raw = bytes(mem)
+                    (qword,) = struct.unpack("<Q", raw)
+                    vals.append(f"0x{qword:016x}")
+                except gdb.MemoryError:
+                    vals.append("<memerr>")
+
+            gdb.write("  ".join(vals) + "\n")
+
+
+VmStackDump()
+
+
+class VmMemDump(gdb.Command):
+    
+    def __init__(self):
+        super().__init__("vm-mem-dump", gdb.COMMAND_USER)
+
+    def invoke(self, arg, from_tty):
+        cfg = load_config()
+        runtime_cfg = cfg.get("runtime", {})
+        vm_mem_cfg = runtime_cfg.get("vm_mem", {})
+
+        # We don't require vm_stack here; just that memory is described
+        vm_state_cfg = vm_mem_cfg.get("vm_state", {})
+        mem_cfg = vm_mem_cfg.get("memory", {})
+
+        symbol = vm_state_cfg.get("symbol")
+        ptr_field = mem_cfg.get("ptr_field")
+        size_field = mem_cfg.get("size_field")
+
+        if not symbol or not ptr_field:
+            gdb.write("[-] vmdbg: vm_state.symbol or memory.ptr_field not configured\n", gdb.STDERR)
+            return
+
+        try:
+            mem_ptr_val = gdb.parse_and_eval(f"{symbol}.{ptr_field}")
+        except gdb.error as e:
+            gdb.write(f"[-] vmdbg: failed to read memory pointer from {symbol}.{ptr_field}: {e}\n", gdb.STDERR)
+            return
+
+        try:
+            mem_base = int(mem_ptr_val)
+        except (TypeError, ValueError) as e:
+            gdb.write(f"[-] vmdbg: invalid memory pointer value: {e}\n", gdb.STDERR)
+            return
+
+        if mem_base == 0:
+            gdb.write("[+] vmdbg: memory pointer is null\n")
+            return
+
+        mem_size = None
+        if size_field:
+            try:
+                mem_size_val = gdb.parse_and_eval(f"{symbol}.{size_field}")
+                mem_size = int(mem_size_val)
+            except (gdb.error, TypeError, ValueError):
+                mem_size = None
+
+        max_to_dump = 20
+        elem_size = 8 
+        inferior = gdb.selected_inferior()
+
+        gdb.write("[+] vmdbg: dumping VM memory")
+        if mem_size is not None:
+            gdb.write(f" (20 qwords from base, size={mem_size})\n")
+        else:
+            gdb.write(" (20 qwords from base)\n")
+
+        start_addr = mem_base
+
+        for i in range(0, max_to_dump, 2):
+            line_addr = start_addr + i * elem_size
+            gdb.write(f"0x{line_addr:016x}: ")
+
+            vals = []
+            for j in range(2):
+                if i + j >= max_to_dump:
+                    break
+                addr = line_addr + j * elem_size
+                try:
+                    mem = inferior.read_memory(addr, elem_size)
+                    raw = bytes(mem)
+                    (qword,) = struct.unpack("<Q", raw)
+                    vals.append(f"0x{qword:016x}")
+                except gdb.MemoryError:
+                    vals.append("<memerr>")
+
+            gdb.write("  ".join(vals) + "\n")
+
+VmMemDump()
+
+class VmCallstackDump(gdb.Command):
+
+    def __init__(self):
+        super().__init__("vm-callstack-dump", gdb.COMMAND_USER)
+
+    def invoke(self, arg, from_tty):
+        cfg = load_config()
+        runtime_cfg = cfg.get("runtime", {})
+        vm_mem_cfg = runtime_cfg.get("vm_mem", {})
+
+        vm_state_cfg = vm_mem_cfg.get("vm_state", {})
+        cs_cfg = vm_mem_cfg.get("callstack", {})
+
+        symbol = vm_state_cfg.get("symbol")
+        ptr_field = cs_cfg.get("ptr_field")
+        depth_field = cs_cfg.get("depth_field")
+
+        if not symbol or not ptr_field or not depth_field:
+            gdb.write(
+                "[-] vmdbg: vm_state.symbol, callstack.ptr_field, or callstack.depth_field not configured\n",
+                gdb.STDERR,
+            )
+            return
+
+        try:
+            cs_ptr_val = gdb.parse_and_eval(f"{symbol}.{ptr_field}")
+            cs_depth_val = gdb.parse_and_eval(f"{symbol}.{depth_field}")
+        except gdb.error as e:
+            gdb.write(
+                f"[-] vmdbg: failed to read callstack fields from {symbol}: {e}\n",
+                gdb.STDERR,
+            )
+            return
+
+        try:
+            cs_base = int(cs_ptr_val)
+            cs_depth = int(cs_depth_val)
+        except (TypeError, ValueError) as e:
+            gdb.write(f"[-] vmdbg: invalid callstack pointer/depth values: {e}\n", gdb.STDERR)
+            return
+
+        if cs_base == 0:
+            gdb.write("[+] vmdbg: callstack pointer is null\n")
+            return
+
+        tos_index = cs_depth - 1
+        if tos_index < 0:
+            gdb.write(f"[+] vmdbg: callstack is empty (depth={cs_depth})\n")
+            return
+
+        max_to_dump = 20
+        elem_size = 8  
+        inferior = gdb.selected_inferior()
+
+        start_addr = cs_base + tos_index * elem_size
+
+        gdb.write(
+            f"[+] vmdbg: dumping VM callstack (20 qwords from TOS, depth={cs_depth}, tos_idx={tos_index})\n"
+        )
+
+        for i in range(0, max_to_dump, 2):
+            line_addr = start_addr + i * elem_size
+            gdb.write(f"0x{line_addr:016x}: ")
+
+            vals = []
+            for j in range(2):
+                if i + j >= max_to_dump:
+                    break
+                addr = line_addr + j * elem_size
+                try:
+                    mem = inferior.read_memory(addr, elem_size)
+                    raw = bytes(mem)
+                    (qword,) = struct.unpack("<Q", raw)
+                    vals.append(f"0x{qword:016x}")
+                except gdb.MemoryError:
+                    vals.append("<memerr>")
+
+            gdb.write("  ".join(vals) + "\n")
+
+VmCallstackDump()

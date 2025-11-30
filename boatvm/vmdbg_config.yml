@@ -1,0 +1,61 @@
+# vmdbg_config.yml
+
+isa_file: "./vm_isa.yml"
+
+bytecode:
+  file: "./float_program.bin"  # produced by Assembler.java
+  base_offset: 0
+  max_size: 0x70000            # 50_000 doubles * 8 bytes ~= 0x61a80, rounded up
+  entry_offset: 0
+
+runtime:
+  # VM single-step dispatcher
+  dispatcher_symbol: "interpret_vm"
+  dispatcher_offset: 0          # start of function; we can refine if you want a post-prologue offset later
+  vm_mem:
+    vm_stack: true
+
+    # Where is the vm_state struct itself?
+    vm_state:
+      # Option 1: we have a symbol
+      symbol: "vm_state"
+
+      # Option 2: we only know offset from PIE base
+      # If symbol is missing or you override it, use this:
+      pie_offset: null 
+
+    # How do we get the PC?
+    pc:
+      # If we have a struct symbol, we can use a field
+      field: "program_count"   # vm_state.program_count
+
+      # If stripped and you computed the offset inside the struct:
+      offset: null
+
+    # Same pattern for stack and memory:
+    stack:
+      ptr_field: "stack"
+      depth_field: "stack_depth"
+      size_field: "stack_size"
+      ptr_offset: 0x08         # offsets inside vm_state
+      depth_offset: 0x10
+      size_offset: 0x18
+
+    memory:
+      ptr_field: "memory"
+      size_field: "memory_size"
+      ptr_offset: 0x20
+      size_offset: 0x28
+
+    callstack:
+      ptr_field: "call_stack"
+      depth_field: "call_stack_depth"
+      size_field: "call_stack_size" 
+      ptr_offset: 0x08         # offsets inside vm_state
+      depth_offset: 0x10
+      size_offset: 0x18
+
+
+disasm:
+  file: "./disasm_boat_vm.txt"
+

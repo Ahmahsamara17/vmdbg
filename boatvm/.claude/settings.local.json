@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__ghidra__search_functions_by_name",
+      "mcp__ghidra__decompile_function"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
