@@ -1,5 +1,5 @@
 # vmdbg.py
-import gdb
+import gdb # type: ignore
 import yaml
 import os
 import struct
@@ -9,6 +9,7 @@ _vm_state = {
     "step": 0,        
     "vm_base": None,  
     "pc_index": None, 
+    "vm_breakpoints": set(),   
 }
 
 
@@ -25,7 +26,6 @@ def load_config(path="vmdbg_config.yml"):
     with open(path, "r", encoding="utf-8") as f:
         _vm_config = yaml.safe_load(f) or {}
     return _vm_config
-
 
 def load_isa_register_order():
     
@@ -48,7 +48,6 @@ def load_isa_register_order():
 
     extras = sorted(r for r in names_in_file if r not in ordered)
     return ordered + extras
-
 
 def read_vm_reg_byte(vm_base, reg_name):
     
@@ -77,7 +76,118 @@ def read_vm_reg_byte(vm_base, reg_name):
         gdb.write(f"[-] vmdbg: failed to read {reg_name} at 0x{addr:x}: {e}\n", gdb.STDERR)
         return None
 
+def _parse_dump_flags(arg, default_count=20, default_unit="g", default_fmt="x"):
+   
+    arg = (arg or "").strip()
+    if not arg or not arg.startswith("/"):
+        return default_count, default_unit, default_fmt
 
+    spec = arg[1:].strip().split()[0] if len(arg) > 1 else ""
+    units = {"b": 1, "h": 2, "w": 4, "g": 8}
+    formats = {"x", "d", "u", "f", "c"}
+
+    count_str = ""
+    unit = None
+    fmt = None
+
+    for ch in spec:
+        if ch.isdigit() and unit is None and fmt is None:
+            count_str += ch
+        elif ch in units and unit is None:
+            unit = ch
+        elif ch in formats and fmt is None:
+            fmt = ch
+        else:
+            continue
+
+    try:
+        count = int(count_str) if count_str else default_count
+        if count <= 0:
+            count = default_count
+    except ValueError:
+        count = default_count
+
+    if unit is None:
+        unit = default_unit
+    if fmt is None:
+        fmt = default_fmt
+
+    return count, unit, fmt
+
+def _dump_vm_memory(start_addr, count, unit, fmt):
+    
+    unit_sizes = {"b": 1, "h": 2, "w": 4, "g": 8}
+    if unit not in unit_sizes:
+        unit = "g"
+    size = unit_sizes[unit]
+
+    inferior = gdb.selected_inferior()
+
+    line_bytes = 16
+    per_line = max(1, line_bytes // size)
+
+    unsigned_fmt = {1: "<B", 2: "<H", 4: "<I", 8: "<Q"}
+    signed_fmt = {1: "<b", 2: "<h", 4: "<i", 8: "<q"}
+    float_fmt = {4: "<f", 8: "<d"}
+
+    for i in range(0, count, per_line):
+        line_addr = start_addr + i * size
+        gdb.write(f"0x{line_addr:016x}: ")
+
+        vals = []
+        for j in range(per_line):
+            idx = i + j
+            if idx >= count:
+                break
+
+            addr = line_addr + j * size
+            try:
+                mem = inferior.read_memory(addr, size)
+                raw = bytes(mem)
+            except gdb.MemoryError:
+                vals.append("<memerr>")
+                continue
+
+            if fmt == "x":
+                try:
+                    (val_u,) = struct.unpack(unsigned_fmt[size], raw)
+                    width = size * 2
+                    vals.append(f"0x{val_u:0{width}x}")
+                except struct.error:
+                    vals.append("<err>")
+            elif fmt == "d":
+                try:
+                    (val_s,) = struct.unpack(signed_fmt[size], raw)
+                    vals.append(f"{val_s}")
+                except struct.error:
+                    vals.append("<err>")
+            elif fmt == "u":
+                try:
+                    (val_u,) = struct.unpack(unsigned_fmt[size], raw)
+                    vals.append(f"{val_u}")
+                except struct.error:
+                    vals.append("<err>")
+            elif fmt == "f" and size in float_fmt:
+                try:
+                    (val_f,) = struct.unpack(float_fmt[size], raw)
+                    vals.append(f"{val_f!r}")
+                except struct.error:
+                    vals.append("<err>")
+            elif fmt == "c" and size == 1:
+                ch = raw[0]
+                if 32 <= ch <= 126:
+                    vals.append(f"'{chr(ch)}'")
+                else:
+                    vals.append(f"'\\x{ch:02x}'")
+            else:
+                try:
+                    (val_u,) = struct.unpack(unsigned_fmt[size], raw)
+                    width = size * 2
+                    vals.append(f"0x{val_u:0{width}x}")
+                except struct.error:
+                    vals.append("<err>")
+
+        gdb.write("  ".join(vals) + "\n")
 
 class VmDispatcherBreakpoint(gdb.Breakpoint):
     def __init__(self, config_path="vmdbg_config.yml"):
@@ -215,20 +325,29 @@ class VmDispatcherBreakpoint(gdb.Breakpoint):
 
         _vm_state["pc_index"] = pc_index
 
-        gdb.write(f"[vmdbg] dispatcher hit #{_vm_state['step']}")
-        if pc_index is not None:
-            gdb.write(f" (pc={pc_index})")
-        gdb.write("\n")
+        vm_bps = _vm_state.get("vm_breakpoints") or set()
 
-        return True
+        if _vm_state.get("single_step"):
+            _vm_state["single_step"] = False
+            gdb.write(f"[vmdbg] vm-next hit at pc={pc_index} (step #{_vm_state['step']})\n")
+            return True
 
+        if not vm_bps:
+            gdb.write(f"[vmdbg] dispatcher hit #{_vm_state['step']}")
+            if pc_index is not None:
+                gdb.write(f" (pc={pc_index})")
+            gdb.write("\n")
+            return True
 
+        if pc_index is not None and pc_index in vm_bps:
+            gdb.write(
+                f"[vmdbg] vm-break hit at pc={pc_index} (step #{_vm_state['step']})\n"
+            )
+            return True
 
-_vm_dispatch_bp = VmDispatcherBreakpoint()
-
+        return False
 
 class ShowDisasm(gdb.Command):
-    
 
     def __init__(self):
         super().__init__("vm-disasm", gdb.COMMAND_USER)
@@ -240,57 +359,117 @@ class ShowDisasm(gdb.Command):
         disasm_cfg = cfg.get("disasm", {})
         path = disasm_cfg.get("file")
         if not path:
-            gdb.write("[-] vmdbg: disasm.file missing in vmdbg_config.yml\n", gdb.STDERR)
+            gdb.write("[-] vmdbg: disasm.file not set in vmdbg_config.yml\n", gdb.STDERR)
             return
         self.disasm_path = path
+
+    def _parse_args(self, arg):
+        
+        arg = (arg or "").strip()
+        if not arg:
+            return 0, None
+
+        tokens = arg.split()
+        offset = 0
+        count = None
+        i = 0
+
+        while i < len(tokens):
+            t = tokens[i]
+            if t in ("-off", "--offset"):
+                if i + 1 >= len(tokens):
+                    gdb.write("[-] vmdbg: -off requires an integer argument\n", gdb.STDERR)
+                    break
+                try:
+                    offset = int(tokens[i + 1], 0)
+                except ValueError:
+                    gdb.write(f"[-] vmdbg: invalid offset {tokens[i+1]!r}\n", gdb.STDERR)
+                i += 2
+            elif t in ("-n", "--count"):
+                if i + 1 >= len(tokens):
+                    gdb.write("[-] vmdbg: -n requires an integer argument\n", gdb.STDERR)
+                    break
+                try:
+                    n = int(tokens[i + 1], 0)
+                    if n > 0:
+                        count = n
+                except ValueError:
+                    gdb.write(f"[-] vmdbg: invalid count {tokens[i+1]!r}\n", gdb.STDERR)
+                i += 2
+            else:
+                gdb.write(f"[-] vmdbg: unknown vm-disasm flag {t!r}\n", gdb.STDERR)
+                i += 1
+
+        return offset, count
 
     def invoke(self, arg, from_tty):
         if self.disasm_path is None:
             self._load_disasm_path()
-            if self.disasm_path is None:
-                return
+        if not self.disasm_path:
+            gdb.write("[-] vmdbg: no disasm file configured\n", gdb.STDERR)
+            return
 
         if not os.path.exists(self.disasm_path):
-            gdb.write(f"[-] Disasm file not found: {self.disasm_path}\n", gdb.STDERR)
+            gdb.write(f"[-] vmdbg: disasm file not found: {self.disasm_path}\n", gdb.STDERR)
             return
 
         try:
             with open(self.disasm_path, "r", encoding="utf-8") as f:
                 raw_lines = f.readlines()
         except OSError as e:
-            gdb.write(f"[-] Failed to read disasm file: {e}\n", gdb.STDERR)
+            gdb.write(f"[-] vmdbg: failed to read disasm file: {e}\n", gdb.STDERR)
             return
 
         lines = [line.rstrip("\n") for line in raw_lines]
+        total = len(lines)
+
+        if total == 0:
+            gdb.write("[+] vmdbg: disasm file is empty\n")
+            return
+
+        pc_idx = _vm_state.get("pc_index")
+        if pc_idx is not None:
+            try:
+                pc_idx = int(pc_idx)
+            except (TypeError, ValueError):
+                pc_idx = None
+
+        if pc_idx is not None and not (0 <= pc_idx < total):
+            pc_idx = None
+
+        offset, count = self._parse_args(arg)
+
+        if pc_idx is not None:
+            base_idx = pc_idx + offset
+            if base_idx < 0:
+                base_idx = 0
+            if base_idx >= total:
+                base_idx = total - 1
+
+            if count is not None:
+                start_idx = base_idx
+                end_idx = min(total, base_idx + count)
+            else:
+                start_idx = max(0, base_idx - 10)
+                end_idx = min(total, base_idx + 10 + 1)
+        else:
+            if count is not None:
+                start_idx = 0
+                end_idx = min(total, count)
+            else:
+                start_idx = 0
+                end_idx = total
 
         gdb.write(f"[+] Showing disassembly from {self.disasm_path}\n\n")
 
-        pc_idx = _vm_state.get("pc_index")
-        if pc_idx is not None and 0 <= pc_idx < len(lines):
-            current_idx = pc_idx
-        elif _vm_state.get("step", 0) > 0:
-            current_idx = _vm_state["step"] - 1
-        else:
-            current_idx = None
-
-        if current_idx is not None:
-            start_idx = max(0, current_idx - 10)
-            end_idx = min(len(lines), current_idx + 10 + 1)
-            idx_range = range(start_idx, end_idx)
-        else:
-            idx_range = range(len(lines))
-
-        for idx in idx_range:
+        for idx in range(start_idx, end_idx):
             text = lines[idx]
             instr_no = idx + 1  
 
-            if current_idx is not None and idx == current_idx:
+            if pc_idx is not None and idx == pc_idx:
                 gdb.write(f"{instr_no:6d}: --> {text}\n")
             else:
                 gdb.write(f"{instr_no:6d}:     {text}\n")
-
-ShowDisasm()
-
 
 class VmRegs(gdb.Command):
     
@@ -330,10 +509,6 @@ class VmRegs(gdb.Command):
                 gdb.write(f"    {reg}: 0x{val:02x} (addr 0x{addr:x})\n")
             except gdb.MemoryError as e:
                 gdb.write(f"    {reg}: <mem error: {e}>\n", gdb.STDERR)
-
-
-VmRegs()
-
 
 class VmStackDump(gdb.Command):
     
@@ -383,36 +558,15 @@ class VmStackDump(gdb.Command):
             gdb.write(f"[+] vmdbg: stack is empty (depth={stack_depth})\n")
             return
 
-        max_to_dump = 20
-        inferior = gdb.selected_inferior()
-        elem_size = 8  
+        count, unit, fmt = _parse_dump_flags(arg, default_count=20, default_unit="g", default_fmt="x")
 
-        start_addr = stack_base + sp_index * elem_size
+        tos_addr = stack_base + sp_index * 8
 
-        gdb.write(f"[+] vmdbg: dumping stack (20 qwords from TOS, depth={stack_depth}, tos_idx={sp_index})\n")
+        gdb.write(
+            f"[+] vmdbg: dumping stack ({count}{unit}{fmt} from TOS, depth={stack_depth}, tos_idx={sp_index})\n"
+        )
 
-        for i in range(0, max_to_dump, 2):
-            line_addr = start_addr + i * elem_size
-            gdb.write(f"0x{line_addr:016x}: ")
-
-            vals = []
-            for j in range(2):
-                if i + j >= max_to_dump:
-                    break
-                addr = line_addr + j * elem_size
-                try:
-                    mem = inferior.read_memory(addr, elem_size)
-                    raw = bytes(mem)
-                    (qword,) = struct.unpack("<Q", raw)
-                    vals.append(f"0x{qword:016x}")
-                except gdb.MemoryError:
-                    vals.append("<memerr>")
-
-            gdb.write("  ".join(vals) + "\n")
-
-
-VmStackDump()
-
+        _dump_vm_memory(tos_addr, count, unit, fmt)
 
 class VmMemDump(gdb.Command):
     
@@ -424,7 +578,6 @@ class VmMemDump(gdb.Command):
         runtime_cfg = cfg.get("runtime", {})
         vm_mem_cfg = runtime_cfg.get("vm_mem", {})
 
-        # We don't require vm_stack here; just that memory is described
         vm_state_cfg = vm_mem_cfg.get("vm_state", {})
         mem_cfg = vm_mem_cfg.get("memory", {})
 
@@ -460,38 +613,15 @@ class VmMemDump(gdb.Command):
             except (gdb.error, TypeError, ValueError):
                 mem_size = None
 
-        max_to_dump = 20
-        elem_size = 8 
-        inferior = gdb.selected_inferior()
+        count, unit, fmt = _parse_dump_flags(arg, default_count=20, default_unit="g", default_fmt="x")
 
         gdb.write("[+] vmdbg: dumping VM memory")
         if mem_size is not None:
-            gdb.write(f" (20 qwords from base, size={mem_size})\n")
+            gdb.write(f" ({count}{unit}{fmt} from base, size={mem_size})\n")
         else:
-            gdb.write(" (20 qwords from base)\n")
+            gdb.write(f" ({count}{unit}{fmt} from base)\n")
 
-        start_addr = mem_base
-
-        for i in range(0, max_to_dump, 2):
-            line_addr = start_addr + i * elem_size
-            gdb.write(f"0x{line_addr:016x}: ")
-
-            vals = []
-            for j in range(2):
-                if i + j >= max_to_dump:
-                    break
-                addr = line_addr + j * elem_size
-                try:
-                    mem = inferior.read_memory(addr, elem_size)
-                    raw = bytes(mem)
-                    (qword,) = struct.unpack("<Q", raw)
-                    vals.append(f"0x{qword:016x}")
-                except gdb.MemoryError:
-                    vals.append("<memerr>")
-
-            gdb.write("  ".join(vals) + "\n")
-
-VmMemDump()
+        _dump_vm_memory(mem_base, count, unit, fmt)
 
 class VmCallstackDump(gdb.Command):
 
@@ -543,33 +673,202 @@ class VmCallstackDump(gdb.Command):
             gdb.write(f"[+] vmdbg: callstack is empty (depth={cs_depth})\n")
             return
 
-        max_to_dump = 20
-        elem_size = 8  
-        inferior = gdb.selected_inferior()
+        count, unit, fmt = _parse_dump_flags(arg, default_count=20, default_unit="g", default_fmt="x")
 
-        start_addr = cs_base + tos_index * elem_size
+        tos_addr = cs_base + tos_index * 8  
 
         gdb.write(
-            f"[+] vmdbg: dumping VM callstack (20 qwords from TOS, depth={cs_depth}, tos_idx={tos_index})\n"
+            f"[+] vmdbg: dumping VM callstack ({count}{unit}{fmt} from TOS, depth={cs_depth}, tos_idx={tos_index})\n"
         )
 
-        for i in range(0, max_to_dump, 2):
-            line_addr = start_addr + i * elem_size
-            gdb.write(f"0x{line_addr:016x}: ")
+        _dump_vm_memory(tos_addr, count, unit, fmt)
 
-            vals = []
-            for j in range(2):
-                if i + j >= max_to_dump:
-                    break
-                addr = line_addr + j * elem_size
+class VmVmmap(gdb.Command):
+
+    def __init__(self):
+        super().__init__("vm-vmmap", gdb.COMMAND_USER)
+
+    def invoke(self, arg, from_tty):
+        cfg = load_config()
+        runtime_cfg = cfg.get("runtime", {})
+        vm_mem_cfg = runtime_cfg.get("vm_mem", {})
+
+        if not vm_mem_cfg.get("vm_vmmap", False):
+            gdb.write("[-] vmdbg: vm_vmmap is not enabled in vmdbg_config.yml\n", gdb.STDERR)
+            return
+
+        vm_state_cfg = vm_mem_cfg.get("vm_state", {})
+        stack_cfg = vm_mem_cfg.get("stack", {})
+        mem_cfg = vm_mem_cfg.get("memory", {})
+        cs_cfg = vm_mem_cfg.get("callstack", {})
+        pc_cfg = vm_mem_cfg.get("pc", {})
+        bc_cfg = vm_mem_cfg.get("bytecode", {})
+
+        entries = []
+
+        vm_state_symbol = vm_state_cfg.get("symbol")
+        vm_state_addr = None
+        if vm_state_symbol:
+            try:
+                vm_state_addr = int(gdb.parse_and_eval(f"&{vm_state_symbol}"))
+            except gdb.error:
+                vm_state_addr = None
+
+        if vm_state_cfg.get("in_vm_vmmap", False) and vm_state_addr is not None:
+            entries.append({
+                "name": "vm_state",
+                "start": vm_state_addr,
+                "end": None,
+                "size": None,
+                "value": None,
+            })
+
+        if pc_cfg.get("in_vm_vmmap", False) and vm_state_symbol:
+            pc_field = pc_cfg.get("field")
+            if pc_field:
+                pc_addr = None
+                pc_val = None
                 try:
-                    mem = inferior.read_memory(addr, elem_size)
-                    raw = bytes(mem)
-                    (qword,) = struct.unpack("<Q", raw)
-                    vals.append(f"0x{qword:016x}")
-                except gdb.MemoryError:
-                    vals.append("<memerr>")
+                    pc_addr_val = gdb.parse_and_eval(f"&{vm_state_symbol}.{pc_field}")
+                    pc_addr = int(pc_addr_val)
+                except gdb.error:
+                    pc_addr = None
 
-            gdb.write("  ".join(vals) + "\n")
+                try:
+                    pc_val_expr = gdb.parse_and_eval(f"{vm_state_symbol}.{pc_field}")
+                    pc_val = int(pc_val_expr)
+                except (gdb.error, TypeError, ValueError):
+                    pc_val = None
 
+                if pc_addr is not None:
+                    entries.append({
+                        "name": "pc",
+                        "start": pc_addr,
+                        "end": None,
+                        "size": None,
+                        "value": pc_val,
+                    })
+
+        def add_region(name, section_cfg, elem_size):
+            if not section_cfg.get("in_vm_vmmap", False):
+                return
+            if not vm_state_symbol:
+                return
+
+            ptr_field = section_cfg.get("ptr_field")
+            size_field = section_cfg.get("size_field")
+            if not ptr_field:
+                return
+
+            try:
+                ptr_val = gdb.parse_and_eval(f"{vm_state_symbol}.{ptr_field}")
+                base = int(ptr_val)
+            except (gdb.error, TypeError, ValueError):
+                base = None
+
+            size = None
+            if size_field:
+                try:
+                    size_val = gdb.parse_and_eval(f"{vm_state_symbol}.{size_field}")
+                    size = int(size_val)
+                except (gdb.error, TypeError, ValueError):
+                    size = None
+
+            if base is None or base == 0:
+                return
+
+            end = None
+            if size is not None:
+                end = base + size * elem_size
+
+            entries.append({
+                "name": name,
+                "start": base,
+                "end": end,
+                "size": size,
+                "value": None,
+            })
+
+        add_region("stack", stack_cfg, 8)
+        add_region("memory", mem_cfg, 8)
+        add_region("callstack", cs_cfg, 8)
+
+        add_region("bytecode", bc_cfg, 1)
+
+        if not entries:
+            gdb.write("[+] vmdbg: no VM regions to display\n")
+            return
+
+        gdb.write("[+] vmdbg: VM memory map\n")
+        gdb.write("{:<12} {:>18} {:>18} {:>10} {:>12}\n".format(
+            "Name", "Start", "End", "Size", "Value"
+        ))
+
+        for e in entries:
+            start = f"0x{e['start']:x}" if e.get("start") is not None else "-"
+            end = f"0x{e['end']:x}" if e.get("end") is not None else "-"
+            size = str(e["size"]) if e.get("size") is not None else "-"
+            val = "" if e.get("value") is None else str(e["value"])
+            gdb.write("{:<12} {:>18} {:>18} {:>10} {:>12}\n".format(
+                e["name"], start, end, size, val
+            ))
+
+class VmBreak(gdb.Command):
+
+    def __init__(self):
+        super().__init__("vm-break", gdb.COMMAND_USER)
+
+    def invoke(self, arg, from_tty):
+        arg = arg.strip()
+        if not arg:
+            gdb.write("Usage: vm-break <pc_idx>\n", gdb.STDERR)
+            return
+
+        try:
+            pc_idx = int(arg, 0)  
+        except ValueError:
+            gdb.write(f"[-] vmdbg: invalid pc_idx {arg!r}; expected integer\n", gdb.STDERR)
+            return
+
+        bps = _vm_state.get("vm_breakpoints")
+        if bps is None:
+            bps = set()
+            _vm_state["vm_breakpoints"] = bps
+
+        first = len(bps) == 0
+        bps.add(pc_idx)
+
+        gdb.write(f"[+] vmdbg: set VM breakpoint at pc={pc_idx}\n")
+        if first:
+            gdb.write("[+] vmdbg: dispatcher will now only stop at VM breakpoints.\n")
+
+class VmNext(gdb.Command):
+  
+
+    def __init__(self):
+        super().__init__("vm-next", gdb.COMMAND_USER)
+
+    def invoke(self, arg, from_tty):
+        _vm_state["single_step"] = True
+        gdb.execute("continue", from_tty=from_tty)
+
+class VmNi(gdb.Command):
+   
+    def __init__(self):
+        super().__init__("vm-ni", gdb.COMMAND_USER)
+
+    def invoke(self, arg, from_tty):
+        gdb.execute("vm-next", from_tty=from_tty)
+
+
+_vm_dispatch_bp = VmDispatcherBreakpoint()
+
+ShowDisasm()
+VmRegs()
+VmStackDump()
+VmMemDump()
 VmCallstackDump()
+VmVmmap()
+VmBreak()
+VmNext()
+VmNi()

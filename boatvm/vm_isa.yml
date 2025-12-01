@@ -1,12 +1,8 @@
 vm_name: "boat_vm"
 byte_order: "little"
 
-# For this VM, instructions are stored as:
-#   [opcode(double)] [optional data(double)]
-# After parsing, you effectively have (opcode, data).
 fields_order: ["opcode", "data"]
 
-# No general-purpose registers; everything is stack-based.
 registers: {}
 
 instructions:
