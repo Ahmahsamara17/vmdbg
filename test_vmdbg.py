@@ -9,7 +9,9 @@ _vm_state = {
     "step": 0,        
     "vm_base": None,  
     "pc_index": None, 
-    "vm_breakpoints": set(),   
+    "vm_breakpoints": set(),
+    "focus": "host", 
+    "pending_vm_disasm": False,  
 }
 
 
@@ -189,6 +191,41 @@ def _dump_vm_memory(start_addr, count, unit, fmt):
 
         gdb.write("  ".join(vals) + "\n")
 
+def _maybe_show_vm_disasm():
+    if _vm_state.get("focus") != "vm":
+        return
+    if _vm_state.get("pc_index") is None:
+        return
+    try:
+        gdb.execute("vm-disasm", to_string=False)
+    except gdb.error as e:
+        gdb.write(f"[-] vmdbg: failed to run vm-disasm in VM mode: {e}\n", gdb.STDERR)
+
+def _maybe_show_vm_regs():
+    if _vm_state.get("focus") != "vm":
+        return
+
+    vm_base = _vm_state.get("vm_base")
+    if vm_base is None:
+        return
+
+    cfg = load_config()
+    runtime_cfg = cfg.get("runtime", {})
+    vm_mem_cfg = runtime_cfg.get("vm_mem", {})
+
+    regs_base_offset = vm_mem_cfg.get("regs_base_offset")
+    if regs_base_offset is None:
+        return
+
+    reg_names = load_isa_register_order()
+    if not reg_names:
+        return
+
+    try:
+        gdb.execute("vm-regs", to_string=False)
+    except gdb.error as e:
+        gdb.write(f"[-] vmdbg: failed to run vm-regs in VM mode: {e}\n", gdb.STDERR)
+
 class VmDispatcherBreakpoint(gdb.Breakpoint):
     def __init__(self, config_path="vmdbg_config.yml"):
         self.config_path = config_path
@@ -321,7 +358,7 @@ class VmDispatcherBreakpoint(gdb.Breakpoint):
             if pc_reg_name and _vm_state.get("vm_base") is not None:
                 pc_val = read_vm_reg_byte(_vm_state["vm_base"], pc_reg_name)
                 if pc_val is not None:
-                    pc_index = pc_val
+                    pc_index = pc_val - 1
 
         _vm_state["pc_index"] = pc_index
 
@@ -330,6 +367,7 @@ class VmDispatcherBreakpoint(gdb.Breakpoint):
         if _vm_state.get("single_step"):
             _vm_state["single_step"] = False
             gdb.write(f"[vmdbg] vm-next hit at pc={pc_index} (step #{_vm_state['step']})\n")
+            _vm_state["pending_vm_disasm"] = True
             return True
 
         if not vm_bps:
@@ -337,12 +375,14 @@ class VmDispatcherBreakpoint(gdb.Breakpoint):
             if pc_index is not None:
                 gdb.write(f" (pc={pc_index})")
             gdb.write("\n")
+            _vm_state["pending_vm_disasm"] = True
             return True
 
         if pc_index is not None and pc_index in vm_bps:
             gdb.write(
                 f"[vmdbg] vm-break hit at pc={pc_index} (step #{_vm_state['step']})\n"
             )
+            _vm_state["pending_vm_disasm"] = True
             return True
 
         return False
@@ -844,7 +884,6 @@ class VmBreak(gdb.Command):
 
 class VmNext(gdb.Command):
   
-
     def __init__(self):
         super().__init__("vm-next", gdb.COMMAND_USER)
 
@@ -860,6 +899,24 @@ class VmNi(gdb.Command):
     def invoke(self, arg, from_tty):
         gdb.execute("vm-next", from_tty=from_tty)
 
+class VmSwitch(gdb.Command):
+    def __init__(self):
+        super().__init__("vm-switch", gdb.COMMAND_USER)
+
+    def invoke(self, arg, from_tty):
+        mode = (arg or "").strip().lower()
+
+        if not mode:
+            mode = "vm" if _vm_state.get("focus") != "vm" else "host"
+        elif mode in ("vm", "host"):
+            pass
+        else:
+            gdb.write("Usage: vm-switch [host|vm]\n", gdb.STDERR)
+            return
+
+        _vm_state["focus"] = mode
+        gdb.write(f"[+] vmdbg: focus set to {mode} mode\n")
+
 
 _vm_dispatch_bp = VmDispatcherBreakpoint()
 
@@ -872,3 +929,12 @@ VmVmmap()
 VmBreak()
 VmNext()
 VmNi()
+VmSwitch()
+
+def _on_stop(event):
+    if _vm_state.get("pending_vm_disasm"):
+        _vm_state["pending_vm_disasm"] = False
+        _maybe_show_vm_disasm()
+        _maybe_show_vm_regs()
+
+gdb.events.stop.connect(_on_stop)
